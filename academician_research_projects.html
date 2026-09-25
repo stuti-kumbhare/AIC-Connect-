@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Projects - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            display: flex;
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 25px 18px;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+
+        .brand h2 {
+            color: #166534;
+            font-size: 22px;
+        }
+
+        .brand p {
+            color: #6b7280;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .menu-title {
+            font-size: 12px;
+            color: #9ca3af;
+            margin: 30px 10px 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .nav-item {
+            display: block;
+            text-decoration: none;
+            color: #374151;
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .active {
+            background: #166534;
+            color: white;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 36px);
+        }
+
+        .main {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 35px;
+        }
+
+        .topbar {
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            color: #14532d;
+            font-size: 30px;
+        }
+
+        .topbar p {
+            margin-top: 8px;
+            color: #6b7280;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #14532d;
+            margin-bottom: 18px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .project-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .project-card h3 {
+            color: #166534;
+            margin-bottom: 10px;
+            font-size: 19px;
+        }
+
+        .project-card p {
+            color: #6b7280;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 12px;
+            margin-right: 6px;
+        }
+
+        .info {
+            margin-top: 18px;
+            background: #f0fdf4;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 10px 16px;
+            background: #166534;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #14532d;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+                width: calc(100% - 210px);
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Academician Portal</p>
+        </div>
+
+        <div class="menu-title">Main Menu</div>
+
+        <a href="{{ url_for('academician_dashboard') }}" class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="{{ url_for('academician_faculty_opportunities') }}" class="nav-item">
+            👨‍🏫 Faculty Opportunities
+        </a>
+
+        <a href="{{ url_for('academician_industrial_training') }}" class="nav-item">
+            🏭 Industrial Training
+        </a>
+
+        <a href="{{ url_for('academician_research_projects') }}" class="nav-item active">
+            🔬 Research Projects
+        </a>
+
+        <a href="{{ url_for('academician_fdp_workshops') }}" class="nav-item">
+            🎓 FDP & Workshops
+        </a>
+
+        <a href="{{ url_for('academician_consultancy') }}" class="nav-item">
+            💼 Consultancy
+        </a>
+
+        <a href="{{ url_for('academician_collaboration') }}" class="nav-item">
+            🤝 Collaboration
+        </a>
+
+        <div class="logout">
+            <a href="{{ url_for('logout') }}" class="nav-item">
+                🚪 Logout
+            </a>
+        </div>
+
+    </aside>
+
+    <main class="main">
+
+        <div class="topbar">
+            <h1>Research Projects</h1>
+            <p>Explore AYUSH-focused research and industry collaboration opportunities.</p>
+        </div>
+
+        <h2 class="section-title">Available Research Opportunities</h2>
+
+        <div class="projects-grid">
+
+            <div class="project-card">
+                <h3>AYUSH Digital Health Research</h3>
+
+                <p>
+                    Research opportunity focused on digital transformation,
+                    healthcare technologies and AYUSH service delivery.
+                </p>
+
+                <span class="tag">Digital Health</span>
+                <span class="tag">AYUSH</span>
+                <span class="tag">Research</span>
+
+                <div class="info">
+                    <b>Organization:</b> Healthcare Research Partner<br>
+                    <b>Mode:</b> Hybrid<br>
+                    <b>Duration:</b> 6 Months
+                </div>
+
+                <a href="#" class="btn">View Project</a>
+            </div>
+
+
+            <div class="project-card">
+                <h3>Traditional Medicine Data Analysis</h3>
+
+                <p>
+                    Collaborative research project involving AYUSH datasets,
+                    research documentation and analytical techniques.
+                </p>
+
+                <span class="tag">Data Analysis</span>
+                <span class="tag">Traditional Medicine</span>
+
+                <div class="info">
+                    <b>Organization:</b> Research Institution<br>
+                    <b>Mode:</b> Hybrid<br>
+                    <b>Duration:</b> 4 Months
+                </div>
+
+                <a href="#" class="btn">View Project</a>
+            </div>
+
+
+            <div class="project-card">
+                <h3>AI in AYUSH Healthcare</h3>
+
+                <p>
+                    Interdisciplinary research project exploring Artificial
+                    Intelligence applications in AYUSH healthcare systems.
+                </p>
+
+                <span class="tag">Artificial Intelligence</span>
+                <span class="tag">Healthcare</span>
+                <span class="tag">AYUSH</span>
+
+                <div class="info">
+                    <b>Organization:</b> Healthcare Innovation Lab<br>
+                    <b>Mode:</b> Hybrid<br>
+                    <b>Duration:</b> 8 Months
+                </div>
+
+                <a href="#" class="btn">View Project</a>
+            </div>
+
+
+            <div class="project-card">
+                <h3>AYUSH Research & Innovation</h3>
+
+                <p>
+                    Research collaboration for developing innovative solutions,
+                    publications, prototypes and practical healthcare solutions.
+                </p>
+
+                <span class="tag">Innovation</span>
+                <span class="tag">Research</span>
+                <span class="tag">Collaboration</span>
+
+                <div class="info">
+                    <b>Organization:</b> AYUSH Innovation Centre<br>
+                    <b>Mode:</b> On-site / Hybrid<br>
+                    <b>Duration:</b> 5 Months
+                </div>
+
+                <a href="#" class="btn">View Project</a>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

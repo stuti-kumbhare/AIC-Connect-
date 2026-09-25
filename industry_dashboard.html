@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Industry Dashboard - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 25px 18px;
+        }
+
+        .brand h2 {
+            color: #166534;
+            font-size: 22px;
+        }
+
+        .brand p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            margin: 30px 10px 12px;
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-item {
+            display: block;
+            text-decoration: none;
+            color: #374151;
+            padding: 12px 14px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .active {
+            background: #166534;
+            color: white;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 36px);
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
+        }
+
+        h1 {
+            color: #14532d;
+            font-size: 30px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-top: 8px;
+            margin-bottom: 30px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat h2 {
+            color: #166534;
+            margin-bottom: 6px;
+        }
+
+        .stat p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .card h3 {
+            color: #166534;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #6b7280;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 10px 16px;
+            background: #166534;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #14532d;
+        }
+
+        .coming {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 10px 16px;
+            background: #e5e7eb;
+            color: #6b7280;
+            border-radius: 8px;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 1000px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Industry Portal</p>
+        </div>
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+        <a
+            href="{{ url_for('industry_dashboard') }}"
+            class="nav-item active"
+        >
+            🏠 Dashboard
+        </a>
+
+        <a
+            href="{{ url_for('industry_post_opportunity') }}"
+            class="nav-item"
+        >
+            📢 Post Opportunities
+        </a>
+
+        <a
+            href="{{ url_for('industry_applications') }}"
+            class="nav-item"
+        >
+            👨‍🎓 Student Applications
+        </a>
+
+        <a
+            href="#"
+            class="nav-item"
+        >
+            🔎 Find Talent
+        </a>
+
+        <a
+            href="#"
+            class="nav-item"
+        >
+            🤝 Collaborations
+        </a>
+
+        <a
+            href="#"
+            class="nav-item"
+        >
+            📊 Analytics
+        </a>
+
+        <div class="logout">
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="nav-item"
+            >
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <h1>
+            Industry Dashboard
+        </h1>
+
+        <p class="subtitle">
+            Connect with skilled students, academicians and AYUSH institutions.
+        </p>
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <h2>
+                    {{ opportunity_count }}
+                </h2>
+
+                <p>
+                    Active Opportunities
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h2>
+                    {{ application_count }}
+                </h2>
+
+                <p>
+                    Applications Received
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h2>
+                    —
+                </h2>
+
+                <p>
+                    Students Shortlisted
+                </p>
+
+            </div>
+
+
+            <div class="stat">
+
+                <h2>
+                    —
+                </h2>
+
+                <p>
+                    Collaborations
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD CARDS -->
+
+        <div class="grid">
+
+
+            <!-- POST OPPORTUNITY -->
+
+            <div class="card">
+
+                <h3>
+                    📢 Post Internship / Job
+                </h3>
+
+                <p>
+                    Publish AYUSH internships, projects, training programmes
+                    and job opportunities for suitable candidates.
+                </p>
+
+                <a
+                    href="{{ url_for('industry_post_opportunity') }}"
+                    class="btn"
+                >
+                    Post Opportunity
+                </a>
+
+            </div>
+
+
+            <!-- APPLICATIONS -->
+
+            <div class="card">
+
+                <h3>
+                    👨‍🎓 Manage Applications
+                </h3>
+
+                <p>
+                    Review student applications, check candidate profiles
+                    and manage the selection process.
+                </p>
+
+                <a
+                    href="{{ url_for('industry_applications') }}"
+                    class="btn"
+                >
+                    View Applications
+                </a>
+
+            </div>
+
+
+            <!-- FIND TALENT -->
+
+            <div class="card">
+
+                <h3>
+                    🔎 Find Skilled Talent
+                </h3>
+
+                <p>
+                    Search and discover students based on skills,
+                    AYUSH domain knowledge and assessment results.
+                </p>
+
+                <span class="coming">
+                    Coming Next
+                </span>
+
+            </div>
+
+
+            <!-- COLLABORATION -->
+
+            <div class="card">
+
+                <h3>
+                    🤝 Academic Collaboration
+                </h3>
+
+                <p>
+                    Connect with academicians and institutions for research,
+                    mentorship, workshops and live industry projects.
+                </p>
+
+                <span class="coming">
+                    Coming Next
+                </span>
+
+            </div>
+
+
+            <!-- ANALYTICS -->
+
+            <div class="card">
+
+                <h3>
+                    📊 Industry Analytics
+                </h3>
+
+                <p>
+                    View opportunity performance, applications,
+                    candidate selection and placement-related analytics.
+                </p>
+
+                <span class="coming">
+                    Coming Next
+                </span>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

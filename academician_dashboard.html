@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Academician Dashboard - AYUSH SkillBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8f6;
+            color: #1f2937;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            width: 250px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 25px 18px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #16834a;
+            margin-bottom: 35px;
+        }
+
+        .nav a {
+            display: block;
+            text-decoration: none;
+            color: #4b5563;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 7px;
+            transition: 0.2s;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #e9f7ef;
+            color: #16834a;
+            font-weight: 600;
+        }
+
+        .logout {
+            margin-top: 25px;
+        }
+
+        .logout a {
+            color: #dc2626;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            flex: 1;
+            padding: 35px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            color: #111827;
+        }
+
+        .header p {
+            margin-top: 7px;
+            color: #6b7280;
+        }
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            background: linear-gradient(135deg, #16834a, #24a764);
+            color: white;
+            padding: 28px;
+            border-radius: 18px;
+            margin: 28px 0;
+        }
+
+        .welcome h2 {
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            line-height: 1.6;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-card h3 {
+            font-size: 27px;
+            color: #16834a;
+            margin-bottom: 7px;
+        }
+
+        .stat-card p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* ================= SERVICES ================= */
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 20px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+            border-color: #16834a;
+        }
+
+        .card h3 {
+            color: #16834a;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #16834a;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #116b3c;
+        }
+
+        /* ================= QUICK LINKS ================= */
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .quick-link {
+            text-decoration: none;
+            color: #374151;
+            background: #f7faf8;
+            border: 1px solid #e3e8e4;
+            padding: 16px;
+            border-radius: 11px;
+            transition: 0.2s;
+        }
+
+        .quick-link:hover {
+            border-color: #16834a;
+            color: #16834a;
+        }
+
+        .quick-link strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .quick-link span {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .container {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .main {
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            AYUSH SkillBridge
+        </div>
+
+
+        <div class="nav">
+
+            <a href="{{ url_for('academician_dashboard') }}"
+               class="active">
+                🏠 Dashboard
+            </a>
+
+
+            <a href="{{ url_for('academician_faculty_opportunities') }}">
+                🎓 Faculty Opportunities
+            </a>
+
+
+            <a href="{{ url_for('academician_industrial_training') }}">
+                🏢 Industrial Training
+            </a>
+
+
+            <a href="{{ url_for('academician_research_projects') }}">
+                🔬 Research & Projects
+            </a>
+
+
+            <a href="{{ url_for('academician_fdp_workshops') }}">
+                📚 FDP & Workshops
+            </a>
+
+
+            <a href="{{ url_for('academician_consultancy') }}">
+                💼 Consultancy
+            </a>
+
+
+            <a href="{{ url_for('academician_collaboration') }}">
+                🤝 Collaboration
+            </a>
+
+
+            <div class="logout">
+
+                <a href="{{ url_for('logout') }}">
+                    🚪 Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <div class="header">
+
+            <h1>
+                Academician Dashboard
+            </h1>
+
+            <p>
+                Welcome, {{ name }}
+            </p>
+
+        </div>
+
+
+        <!-- ================= WELCOME ================= -->
+
+        <div class="welcome">
+
+            <h2>
+                Academia–Industry Collaboration
+            </h2>
+
+            <p>
+                Connect with industry opportunities, research projects,
+                faculty training, professional development programs and
+                collaborative initiatives through AYUSH SkillBridge.
+            </p>
+
+        </div>
+
+
+        <!-- ================= STATS ================= -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <h3>
+                    12+
+                </h3>
+
+                <p>
+                    Faculty Opportunities
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    08
+                </h3>
+
+                <p>
+                    Research Projects
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    06
+                </h3>
+
+                <p>
+                    Training Programs
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    05
+                </h3>
+
+                <p>
+                    Industry Collaborations
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SERVICES ================= -->
+
+        <div class="section">
+
+            <h2>
+                Academician Services
+            </h2>
+
+
+            <div class="cards">
+
+
+                <!-- FACULTY OPPORTUNITIES -->
+
+                <div class="card">
+
+                    <h3>
+                        Faculty Opportunities
+                    </h3>
+
+                    <p>
+                        Explore faculty internships, academic-industry
+                        programs and professional opportunities.
+                    </p>
+
+                    <a href="{{ url_for('academician_faculty_opportunities') }}"
+                       class="btn">
+
+                        Explore →
+
+                    </a>
+
+                </div>
+
+
+                <!-- INDUSTRIAL TRAINING -->
+
+                <div class="card">
+
+                    <h3>
+                        Industrial Training
+                    </h3>
+
+                    <p>
+                        Find industrial training programs that help
+                        academicians gain practical exposure.
+                    </p>
+
+                    <a href="{{ url_for('academician_industrial_training') }}"
+                       class="btn">
+
+                        View Training →
+
+                    </a>
+
+                </div>
+
+
+                <!-- RESEARCH -->
+
+                <div class="card">
+
+                    <h3>
+                        Research & Projects
+                    </h3>
+
+                    <p>
+                        Discover collaborative research projects,
+                        innovation challenges and live projects.
+                    </p>
+
+                    <a href="{{ url_for('academician_research_projects') }}"
+                       class="btn">
+
+                        View Projects →
+
+                    </a>
+
+                </div>
+
+
+                <!-- FDP -->
+
+                <div class="card">
+
+                    <h3>
+                        FDP & Workshops
+                    </h3>
+
+                    <p>
+                        Access faculty development programs, workshops,
+                        seminars and expert sessions.
+                    </p>
+
+                    <a href="{{ url_for('academician_fdp_workshops') }}"
+                       class="btn">
+
+                        Explore Programs →
+
+                    </a>
+
+                </div>
+
+
+                <!-- CONSULTANCY -->
+
+                <div class="card">
+
+                    <h3>
+                        Consultancy
+                    </h3>
+
+                    <p>
+                        Connect academic expertise with industry
+                        consultancy and knowledge-sharing opportunities.
+                    </p>
+
+                    <a href="{{ url_for('academician_consultancy') }}"
+                       class="btn">
+
+                        Explore Consultancy →
+
+                    </a>
+
+                </div>
+
+
+                <!-- COLLABORATION -->
+
+                <div class="card">
+
+                    <h3>
+                        Industry Collaboration
+                    </h3>
+
+                    <p>
+                        Build partnerships with organizations for
+                        research, training, projects and mentoring.
+                    </p>
+
+                    <a href="{{ url_for('academician_collaboration') }}"
+                       class="btn">
+
+                        Collaborate →
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= QUICK LINKS ================= -->
+
+        <div class="section">
+
+            <h2>
+                Quick Access
+            </h2>
+
+
+            <div class="quick-links">
+
+
+                <a href="{{ url_for('academician_faculty_opportunities') }}"
+                   class="quick-link">
+
+                    <strong>
+                        🎓 Faculty Programs
+                    </strong>
+
+                    <span>
+                        Explore faculty opportunities
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('academician_research_projects') }}"
+                   class="quick-link">
+
+                    <strong>
+                        🔬 Research
+                    </strong>
+
+                    <span>
+                        View research and project opportunities
+                    </span>
+
+                </a>
+
+
+                <a href="{{ url_for('academician_collaboration') }}"
+                   class="quick-link">
+
+                    <strong>
+                        🤝 Collaboration
+                    </strong>
+
+                    <span>
+                        Connect with industry partners
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

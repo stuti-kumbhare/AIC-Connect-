@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skill Gap Analysis - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: #14532d;
+            color: white;
+            padding: 24px 18px;
+            overflow-y: auto;
+        }
+
+        .brand {
+            padding: 5px 12px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 18px;
+        }
+
+        .brand h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .brand p {
+            font-size: 11px;
+            color: #d1fae5;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #bbf7d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 11px 13px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255,255,255,0.13);
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 18px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 17px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .topbar h1 {
+            color: #14532d;
+            font-size: 23px;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-text span {
+            display: block;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 32px;
+            max-width: 1200px;
+        }
+
+        .intro {
+            margin-bottom: 25px;
+        }
+
+        .intro h2 {
+            color: #124e2a;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            color: #6b7280;
+            font-size: 14px;
+            max-width: 850px;
+            line-height: 1.6;
+        }
+
+        /* ================= OVERVIEW ================= */
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .overview-card {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 13px;
+            padding: 22px;
+        }
+
+        .overview-card h3 {
+            color: #176b3a;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .overview-card .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #124e2a;
+        }
+
+        .overview-card p {
+            color: #6b7280;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* ================= PANEL ================= */
+
+        .panel {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .panel-header {
+            margin-bottom: 22px;
+        }
+
+        .panel-header h2 {
+            color: #124e2a;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .panel-header p {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        /* ================= SKILL ROW ================= */
+
+        .skill-row {
+            margin-bottom: 20px;
+        }
+
+        .skill-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .skill-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .skill-percentage {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .progress {
+            width: 100%;
+            height: 9px;
+            background: #e7ece8;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #176b3a;
+            border-radius: 20px;
+        }
+
+        .skill-status {
+            display: inline-block;
+            margin-top: 7px;
+            padding: 4px 9px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .strong {
+            background: #e4f4e9;
+            color: #176b3a;
+        }
+
+        .moderate {
+            background: #fff4d9;
+            color: #8a6200;
+        }
+
+        .needs {
+            background: #fdecec;
+            color: #a33b3b;
+        }
+
+        /* ================= TWO COLUMN ================= */
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        /* ================= GAP CARD ================= */
+
+        .gap-card {
+            border: 1px solid #e3e8e4;
+            border-radius: 11px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .gap-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .gap-card h3 {
+            font-size: 14px;
+            color: #1f2937;
+            margin-bottom: 6px;
+        }
+
+        .gap-card p {
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .gap-badge {
+            display: inline-block;
+            margin-top: 9px;
+            padding: 5px 9px;
+            border-radius: 14px;
+            background: #fff4d9;
+            color: #8a6200;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* ================= RECOMMENDATION ================= */
+
+        .recommendation {
+            border: 1px solid #e3e8e4;
+            border-radius: 11px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .recommendation:last-child {
+            margin-bottom: 0;
+        }
+
+        .recommendation h3 {
+            font-size: 14px;
+            color: #176b3a;
+            margin-bottom: 6px;
+        }
+
+        .recommendation p {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .recommendation-tag {
+            display: inline-block;
+            margin-top: 9px;
+            padding: 5px 9px;
+            border-radius: 14px;
+            background: #edf8f0;
+            color: #176b3a;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* ================= NEXT ================= */
+
+        .next-step {
+            border-left: 4px solid #176b3a;
+            padding: 15px 17px;
+            margin-bottom: 12px;
+            background: #f7faf8;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .next-step h3 {
+            color: #176b3a;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .next-step p {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 19px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #176b3a;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #176b3a;
+            border: 1px solid #176b3a;
+        }
+
+        .note {
+            margin-top: 20px;
+            padding: 13px;
+            background: #f7faf8;
+            border: 1px solid #e4ebe6;
+            border-radius: 9px;
+            color: #6b7280;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .profile-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Student Portal</p>
+        </div>
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+        <a href="/student/dashboard" class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="/student/profile" class="nav-item">
+            👤 My Profile
+        </a>
+
+        <a href="/student/assessment" class="nav-item">
+            📝 Skill Assessment
+        </a>
+
+        <a href="/student/skill-gap" class="nav-item active">
+            📊 Skill Gap Analysis
+        </a>
+
+        <a href="#" class="nav-item">
+            🎓 Learning Programs
+        </a>
+
+        <a href="#" class="nav-item">
+            🌿 AYUSH Internships
+        </a>
+
+        <a href="#" class="nav-item">
+            💼 Placements
+        </a>
+
+        <div class="menu-title">
+            My Activity
+        </div>
+
+        <a href="#" class="nav-item">
+            📋 My Applications
+        </a>
+
+        <a href="#" class="nav-item">
+            🪪 Digital Portfolio
+        </a>
+
+        <a href="#" class="nav-item">
+            🔔 Notifications
+        </a>
+
+        <div class="logout">
+            <a href="/logout" class="nav-item">
+                🚪 Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <h1>Skill Gap Analysis</h1>
+
+            <div class="profile-area">
+
+                <div class="avatar">
+                    {{ name[0] | upper }}
+                </div>
+
+                <div class="profile-text">
+
+                    <strong>
+                        {{ name }}
+                    </strong>
+
+                    <span>
+                        Student
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="content">
+
+            <!-- INTRO -->
+
+            <div class="intro">
+
+                <h2>
+                    Understand Your Skill Gaps
+                </h2>
+
+                <p>
+                    Based on your assessment results, AYUSH SkillBridge
+                    identifies competency areas that are strong, moderate,
+                    or require further development.
+                </p>
+
+            </div>
+
+
+            <!-- OVERVIEW -->
+
+            <section class="overview-grid">
+
+                <div class="overview-card">
+
+                    <h3>
+                        Overall Skill Score
+                    </h3>
+
+                    <div class="value">
+                        {{ overall_percentage | round(0) | int }}%
+                    </div>
+
+                    <p>
+                        Based on your latest assessment
+                    </p>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <h3>
+                        Strong Areas
+                    </h3>
+
+                    <div class="value">
+                        {{ strong_count }}
+                    </div>
+
+                    <p>
+                        Competency areas performing well
+                    </p>
+
+                </div>
+
+
+                <div class="overview-card">
+
+                    <h3>
+                        Development Areas
+                    </h3>
+
+                    <div class="value">
+                        {{ gap_count }}
+                    </div>
+
+                    <p>
+                        Areas recommended for improvement
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- SKILL PROFILE -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Your Competency Profile
+                    </h2>
+
+                    <p>
+                        Category-wise performance from your latest assessment.
+                    </p>
+
+                </div>
+
+
+                {% if categories %}
+
+                    {% for item in categories %}
+
+                        <div class="skill-row">
+
+                            <div class="skill-top">
+
+                                <span class="skill-name">
+                                    {{ item["category"] }}
+                                </span>
+
+                                <span class="skill-percentage">
+                                    {{ item["percentage"] | round(0) | int }}%
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress">
+
+                                <div
+                                    class="progress-bar"
+                                    style="width: {{ item.percentage }}%;"
+                                >
+                                </div>
+
+                            </div>
+
+
+                            {% if item["percentage"] >= 75 %}
+
+                                <span class="skill-status strong">
+                                    Strong
+                                </span>
+
+                            {% elif item["percentage"] >= 60 %}
+
+                                <span class="skill-status moderate">
+                                    Moderate
+                                </span>
+
+                            {% else %}
+
+                                <span class="skill-status needs">
+                                    Needs Development
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <p>
+                        Complete the Skill Assessment to generate
+                        your competency profile.
+                    </p>
+
+                {% endif %}
+
+            </section>
+
+
+            <!-- GAP + RECOMMENDATIONS -->
+
+            <section class="two-column">
+
+                <!-- SKILL GAPS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Priority Skill Gaps
+                        </h2>
+
+                        <p>
+                            Areas where additional development may be helpful.
+                        </p>
+
+                    </div>
+
+
+                    {% if gaps %}
+
+                        {% for gap in gaps %}
+
+                            <div class="gap-card">
+
+                                <h3>
+                                    {{ gap["category"] }}
+                                </h3>
+
+                                <p>
+                                    Current score:
+                                    <strong>
+                                        {{ gap["percentage"] | round(0) | int }}%
+                                    </strong>
+
+                                    — development is recommended to strengthen
+                                    this competency.
+                                </p>
+
+                                <span class="gap-badge">
+                                    Priority Development Area
+                                </span>
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="gap-card">
+
+                            <h3>
+                                No major gaps identified
+                            </h3>
+
+                            <p>
+                                Your current assessment does not indicate
+                                a major development gap.
+                            </p>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- RECOMMENDATIONS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Recommended Development
+                        </h2>
+
+                        <p>
+                            Suggested areas based on identified gaps.
+                        </p>
+
+                    </div>
+
+
+                    {% for recommendation in recommendations %}
+
+                        <div class="recommendation">
+
+                            <h3>
+                                {{ recommendation["title"] }}
+                            </h3>
+
+                            <p>
+                                {{ recommendation["description"] }}
+                            </p>
+
+                            <span class="recommendation-tag">
+                                {{ recommendation["tag"] }}
+                            </span>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </section>
+
+
+            <!-- NEXT STEPS -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        What Should You Do Next?
+                    </h2>
+
+                    <p>
+                        Use your skill-gap results to plan your next development steps.
+                    </p>
+
+                </div>
+
+
+                <div class="next-step">
+
+                    <h3>
+                        1. Strengthen Priority Skills
+                    </h3>
+
+                    <p>
+                        Focus on the competency areas where your assessment
+                        score indicates further development is required.
+                    </p>
+
+                </div>
+
+
+                <div class="next-step">
+
+                    <h3>
+                        2. Explore Learning Programs
+                    </h3>
+
+                    <p>
+                        Review recommended training, learning resources,
+                        workshops and certifications aligned with your gaps.
+                    </p>
+
+                </div>
+
+
+                <div class="next-step">
+
+                    <h3>
+                        3. Explore Relevant Opportunities
+                    </h3>
+
+                    <p>
+                        Once your skill profile improves, the platform can
+                        match you with relevant internships, projects and
+                        placement opportunities.
+                    </p>
+
+                </div>
+
+
+                <div class="actions">
+
+                    <a
+                        href="/student/dashboard"
+                        class="btn btn-primary"
+                    >
+                        Back to Dashboard
+                    </a>
+
+                    <a
+                        href="/student/assessment"
+                        class="btn btn-secondary"
+                    >
+                        Retake Assessment
+                    </a>
+
+                </div>
+
+
+                <div class="note">
+
+                    <strong>How this works:</strong>
+                    Your assessment scores are analyzed category-wise.
+                    Categories with lower scores are highlighted as
+                    development areas. These results will later power
+                    personalized learning recommendations and
+                    opportunity matching.
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

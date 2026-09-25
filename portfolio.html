@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Digital Portfolio - AYUSH SkillBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #14532d;
+            color: white;
+            padding: 24px 18px;
+            overflow-y: auto;
+        }
+
+        .brand {
+            padding: 5px 12px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 18px;
+        }
+
+        .brand h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .brand p {
+            font-size: 11px;
+            color: #d1fae5;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #bbf7d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 11px 13px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255,255,255,0.13);
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 18px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 17px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar h1 {
+            font-size: 23px;
+            color: #14532d;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-text span {
+            display: block;
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 32px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #e6f5eb, #f2faf4);
+            border: 1px solid #d6ebdc;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .hero h2 {
+            color: #124e2a;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #5f6b63;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 850px;
+        }
+
+        /* ================= PORTFOLIO HEADER ================= */
+
+        .portfolio-header {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .portfolio-person {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .big-avatar {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .portfolio-person h2 {
+            color: #124e2a;
+            font-size: 23px;
+            margin-bottom: 4px;
+        }
+
+        .portfolio-person p {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .profile-btn {
+            display: inline-block;
+            background: #176b3a;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .profile-btn:hover {
+            background: #12552e;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 22px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 13px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: #176b3a;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        /* ================= GRID ================= */
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            margin-bottom: 22px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 14px;
+            padding: 23px;
+        }
+
+        .panel h2 {
+            color: #124e2a;
+            font-size: 19px;
+            margin-bottom: 18px;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about-text {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .info-row {
+            padding: 11px 0;
+            border-bottom: 1px solid #edf0ee;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            display: block;
+            color: #8a938d;
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            color: #374151;
+            font-size: 13px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .empty-value {
+            color: #9ca3af;
+            font-weight: normal;
+        }
+
+        /* ================= SKILLS ================= */
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: #edf8f0;
+            color: #176b3a;
+            border: 1px solid #d7eadc;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ================= ASSESSMENT ================= */
+
+        .assessment-box {
+            background: #f7faf8;
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .assessment-score {
+            font-size: 35px;
+            font-weight: bold;
+            color: #176b3a;
+            margin-bottom: 5px;
+        }
+
+        .assessment-box p {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .assessment-btn {
+            display: inline-block;
+            margin-top: 14px;
+            color: #176b3a;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .assessment-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= ACHIEVEMENTS ================= */
+
+        .achievement {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 13px 0;
+            border-bottom: 1px solid #edf0ee;
+        }
+
+        .achievement:last-child {
+            border-bottom: none;
+        }
+
+        .achievement-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #edf8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .achievement h3 {
+            color: #374151;
+            font-size: 13px;
+            margin-bottom: 3px;
+        }
+
+        .achievement p {
+            color: #6b7280;
+            font-size: 11px;
+        }
+
+        /* ================= ACTIONS ================= */
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 15px;
+        }
+
+        .action-card {
+            display: block;
+            border: 1px solid #e3e8e4;
+            border-radius: 11px;
+            padding: 18px;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            border-color: #176b3a;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+        }
+
+        .action-icon {
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .action-card h3 {
+            color: #176b3a;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .action-card p {
+            color: #6b7280;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer-note {
+            text-align: center;
+            color: #8a938d;
+            font-size: 11px;
+            padding: 30px 0 10px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .portfolio-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-person {
+                align-items: flex-start;
+            }
+
+            .big-avatar {
+                width: 65px;
+                height: 65px;
+                font-size: 24px;
+            }
+
+            .portfolio-person h2 {
+                font-size: 19px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= COMMON SIDEBAR ================= -->
+
+{% include '_sidebar.html' %}
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <h1>
+            Digital Portfolio
+        </h1>
+
+        <div class="profile-area">
+
+            <div class="avatar">
+                {{ name[0] | upper }}
+            </div>
+
+            <div class="profile-text">
+
+                <strong>
+                    {{ name }}
+                </strong>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <div class="content">
+
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero">
+
+            <h2>
+                Your Digital Portfolio 🪪
+            </h2>
+
+            <p>
+                Showcase your academic profile, skills, assessment
+                performance, applications and career interests in
+                one professional digital portfolio.
+            </p>
+
+        </section>
+
+
+        <!-- ================= PORTFOLIO HEADER ================= -->
+
+        <section class="portfolio-header">
+
+            <div class="portfolio-person">
+
+                <div class="big-avatar">
+                    {{ name[0] | upper }}
+                </div>
+
+                <div>
+
+                    <h2>
+                        {{
+                            profile['full_name']
+                            if profile and profile['full_name']
+                            else name
+                        }}
+                    </h2>
+
+                    <p>
+                        {{
+                            profile['course']
+                            if profile and profile['course']
+                            else "Student"
+                        }}
+                        •
+                        {{
+                            profile['institution']
+                            if profile and profile['institution']
+                            else "AYUSH SkillBridge"
+                        }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a href="{{ url_for('student_profile') }}"
+               class="profile-btn">
+
+                Edit Profile
+
+            </a>
+
+        </section>
+
+
+        <!-- ================= STATS ================= -->
+
+        <section class="stats-grid">
+
+
+            <div class="stat-card">
+
+                <h3>
+                    {% if latest_result %}
+                        {{ latest_result['percentage'] }}%
+                    {% else %}
+                        0%
+                    {% endif %}
+                </h3>
+
+                <p>
+                    Assessment Score
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    {{ application_count }}
+                </h3>
+
+                <p>
+                    Applications
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    6
+                </h3>
+
+                <p>
+                    Skill Categories
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ================= PROFILE + ASSESSMENT ================= -->
+
+        <section class="portfolio-grid">
+
+
+            <!-- PROFILE INFORMATION -->
+
+            <div class="panel">
+
+                <h2>
+                    Profile Information
+                </h2>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Full Name
+                    </span>
+
+                    {% if profile and profile['full_name'] %}
+
+                        <span class="info-value">
+                            {{ profile['full_name'] }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="info-value empty-value">
+                            Not added
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Email
+                    </span>
+
+                    {% if profile and profile['email'] %}
+
+                        <span class="info-value">
+                            {{ profile['email'] }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="info-value empty-value">
+                            Not added
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Institution
+                    </span>
+
+                    {% if profile and profile['institution'] %}
+
+                        <span class="info-value">
+                            {{ profile['institution'] }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="info-value empty-value">
+                            Not added
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Department / Branch
+                    </span>
+
+                    {% if profile and profile['department'] %}
+
+                        <span class="info-value">
+                            {{ profile['department'] }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="info-value empty-value">
+                            Not added
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                        Career Interest
+                    </span>
+
+                    {% if profile and profile['career_interest'] %}
+
+                        <span class="info-value">
+                            {{ profile['career_interest'].replace('_',' ').title() }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="info-value empty-value">
+                            Not selected
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ASSESSMENT -->
+
+            <div class="panel">
+
+                <h2>
+                    Skill Assessment
+                </h2>
+
+
+                {% if latest_result %}
+
+                    <div class="assessment-box">
+
+                        <div class="assessment-score">
+
+                            {{ latest_result['percentage'] }}%
+
+                        </div>
+
+                        <p>
+                            Your latest skill assessment score.
+                        </p>
+
+                        <a href="{{ url_for('student_assessment') }}"
+                           class="assessment-btn">
+
+                            Retake Assessment →
+
+                        </a>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="assessment-box">
+
+                        <div class="assessment-score">
+                            Not Completed
+                        </div>
+
+                        <p>
+                            Complete your skill assessment to
+                            generate your skill profile.
+                        </p>
+
+                        <a href="{{ url_for('student_assessment') }}"
+                           class="assessment-btn">
+
+                            Start Assessment →
+
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SKILLS ================= -->
+
+        <section class="panel"
+                 style="margin-bottom:22px;">
+
+            <h2>
+                Skills & Competencies
+            </h2>
+
+
+            <div class="skill-tags">
+
+                <span class="skill-tag">
+                    AYUSH Domain Knowledge
+                </span>
+
+                <span class="skill-tag">
+                    Research & Documentation
+                </span>
+
+                <span class="skill-tag">
+                    Healthcare Data & Digital Skills
+                </span>
+
+                <span class="skill-tag">
+                    Communication
+                </span>
+
+                <span class="skill-tag">
+                    Analytical Thinking
+                </span>
+
+                <span class="skill-tag">
+                    Aptitude & Problem Solving
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ACHIEVEMENTS ================= -->
+
+        <section class="portfolio-grid">
+
+
+            <div class="panel">
+
+                <h2>
+                    Achievements
+                </h2>
+
+
+                <div class="achievement">
+
+                    <div class="achievement-icon">
+                        🏆
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Skill Assessment Completed
+                        </h3>
+
+                        <p>
+                            AYUSH SkillBridge competency assessment
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="achievement">
+
+                    <div class="achievement-icon">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Application Activity
+                        </h3>
+
+                        <p>
+                            {{ application_count }} opportunity application(s)
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="achievement">
+
+                    <div class="achievement-icon">
+                        🎓
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Digital Profile
+                        </h3>
+
+                        <p>
+                            Academic and career profile created
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ABOUT -->
+
+            <div class="panel">
+
+                <h2>
+                    About Me
+                </h2>
+
+
+                {% if profile and profile['bio'] %}
+
+                    <p class="about-text">
+                        {{ profile['bio'] }}
+                    </p>
+
+                {% else %}
+
+                    <p class="about-text">
+                        Complete your profile to add your academic
+                        interests, career goals and professional
+                        summary here.
+                    </p>
+
+                    <a href="{{ url_for('student_profile') }}"
+                       class="assessment-btn">
+
+                        Complete Profile →
+
+                    </a>
+
+                {% endif %}
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PORTFOLIO ACTIONS ================= -->
+
+        <section class="panel">
+
+            <h2>
+                Portfolio Actions
+            </h2>
+
+
+            <div class="action-grid">
+
+
+                <a href="{{ url_for('student_profile') }}"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        Update Profile →
+                    </h3>
+
+                    <p>
+                        Keep your academic and career information updated.
+                    </p>
+
+                </a>
+
+
+                <a href="{{ url_for('student_skill_gap') }}"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        📊
+                    </div>
+
+                    <h3>
+                        View Skill Gap →
+                    </h3>
+
+                    <p>
+                        Check your development areas and recommendations.
+                    </p>
+
+                </a>
+
+
+                <a href="{{ url_for('student_opportunities') }}"
+                   class="action-card">
+
+                    <div class="action-icon">
+                        💼
+                    </div>
+
+                    <h3>
+                        Explore Opportunities →
+                    </h3>
+
+                    <p>
+                        Discover AYUSH internships and project opportunities.
+                    </p>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <div class="footer-note">
+
+            AYUSH SkillBridge • SIH26044 • Proposed Solution for Ministry of Ayush Problem Statement
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>

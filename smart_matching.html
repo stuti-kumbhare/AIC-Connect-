@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Skill Matching - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f6;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #0f5132;
+            color: white;
+            padding: 25px 18px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: #d7f5e5;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 13px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #198754;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 25px;
+            left: 18px;
+            right: 18px;
+            background: #dc3545 !important;
+            text-align: center;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 22px 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .header h1 {
+            color: #0f5132;
+            font-size: 28px;
+            margin-bottom: 7px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .profile-box {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .profile-box h2 {
+            color: #0f5132;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .profile-box p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .card h3 {
+            color: #0f5132;
+            margin-bottom: 10px;
+            font-size: 19px;
+        }
+
+        .card p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .match-score {
+            margin-top: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #0f5132;
+        }
+
+        .bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: #198754;
+            border-radius: 10px;
+        }
+
+        .skills {
+            margin-top: 15px;
+        }
+
+        .skill {
+            display: inline-block;
+            background: #eaf6ef;
+            color: #0f5132;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px 4px 0 0;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            background: #198754;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #146c43;
+        }
+
+        .empty {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 12px;
+            color: #6b7280;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .info-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .info-box h2 {
+            color: #0f5132;
+            margin-bottom: 12px;
+        }
+
+        .info-box p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 850px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+                padding: 20px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Student Portal</p>
+        </div>
+
+        <div class="menu">
+
+            <a href="{{ url_for('student_dashboard') }}">
+                🏠 Dashboard
+            </a>
+
+            <a href="{{ url_for('student_profile') }}">
+                👤 Profile
+            </a>
+
+            <a href="{{ url_for('student_assessment') }}">
+                📝 Skill Assessment
+            </a>
+
+            <a href="{{ url_for('student_skill_gap') }}">
+                📊 Skill Gap
+            </a>
+
+            <a href="{{ url_for('student_learning') }}">
+                📚 Learning
+            </a>
+
+            <a href="{{ url_for('student_opportunities') }}">
+                💼 Opportunities
+            </a>
+
+            <a href="{{ url_for('student_placements') }}">
+                📈 Placements
+            </a>
+
+            <a href="{{ url_for('student_portfolio') }}">
+                📁 Portfolio
+            </a>
+
+            <a href="{{ url_for('smart_matching') }}" class="active">
+                🎯 Smart Matching
+            </a>
+
+            <a href="{{ url_for('notifications') }}">
+                🔔 Notifications
+            </a>
+
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="menu logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <!-- Main -->
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Smart Skill Matching</h1>
+
+            <p>
+                Discover internships, projects and career opportunities
+                that best match your assessed skills and career interests.
+            </p>
+
+        </div>
+
+
+        <!-- Student Profile Summary -->
+        <div class="profile-box">
+
+            <h2>Your Matching Profile</h2>
+
+            <p>
+                <strong>Student:</strong>
+                {{ name }}
+            </p>
+
+            <p>
+                <strong>Career Interest:</strong>
+                {{ career_interest or "Not updated" }}
+            </p>
+
+            <p>
+                <strong>Assessment Score:</strong>
+                {{ overall_percentage }}%
+            </p>
+
+        </div>
+
+
+        <!-- Matches -->
+        {% if matches %}
+
+        <div class="cards">
+
+            {% for match in matches %}
+
+            <div class="card">
+
+                <h3>
+                    {{ match["title"] }}
+                </h3>
+
+                <p>
+                    <strong>Organization:</strong>
+                    {{ match["organization"] or "Not Available" }}
+                </p>
+
+                <p>
+                    <strong>Type:</strong>
+                    {{ match["opportunity_type"] }}
+                </p>
+
+                <p>
+                    <strong>Domain:</strong>
+                    {{ match["domain"] or "Not Available" }}
+                </p>
+
+                <p>
+                    <strong>Mode:</strong>
+                    {{ match["mode"] or "Not Specified" }}
+                </p>
+
+                <p>
+                    {{ match["description"] or "No description available." }}
+                </p>
+
+
+                <div class="match-score">
+                    {{ match["match_percentage"] }}% Match
+                </div>
+
+                <div class="bar">
+                    <div
+                        class="bar-fill"
+                        style="width: {{ match['match_percentage'] }}%;"
+                    ></div>
+                </div>
+
+
+                <div class="skills">
+
+                    <strong>Matched Skills:</strong>
+
+                    <br>
+
+                    {% for skill in match["matched_skills"] %}
+
+                        <span class="skill">
+                            {{ skill }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="skill">
+                            General Eligibility
+                        </span>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('student_opportunity_details', opportunity_id=match['id']) }}"
+                    class="btn"
+                >
+                    View Opportunity
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty">
+
+            <h3>No Matching Opportunities Found</h3>
+
+            <p style="margin-top: 10px;">
+                Complete your profile and skill assessment to receive
+                better opportunity recommendations.
+            </p>
+
+            <a
+                href="{{ url_for('student_assessment') }}"
+                class="btn"
+            >
+                Take Skill Assessment
+            </a>
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="info-box">
+
+            <h2>How Smart Matching Works</h2>
+
+            <p>
+                AYUSH SkillBridge compares the student's assessed skill
+                categories and career interest with the domain and required
+                skills of available opportunities. Opportunities with a
+                stronger skill match are shown with a higher match score.
+            </p>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

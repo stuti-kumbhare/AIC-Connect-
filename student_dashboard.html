@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #14532d;
+            color: white;
+            padding: 24px 18px;
+            overflow-y: auto;
+        }
+
+        .brand {
+            padding: 5px 12px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 18px;
+        }
+
+        .brand h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .brand p {
+            font-size: 11px;
+            color: #d1fae5;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #bbf7d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            color: white;
+            padding: 11px 13px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255,255,255,0.14);
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 18px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 17px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar h1 {
+            font-size: 23px;
+            color: #14532d;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-text span {
+            display: block;
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .content {
+            padding: 32px;
+        }
+
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            background: linear-gradient(135deg, #e6f5eb, #f2faf4);
+            border: 1px solid #d6ebdc;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .welcome h2 {
+            font-size: 27px;
+            color: #124e2a;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #5f6b63;
+            font-size: 15px;
+            max-width: 760px;
+            line-height: 1.6;
+        }
+
+
+        /* ================= STATS ================= */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 13px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h3 {
+            color: #176b3a;
+            font-size: 28px;
+            margin-bottom: 4px;
+        }
+
+        .stat-card p {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 11px;
+            background: #edf8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+
+        /* ================= GRID ================= */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 22px;
+            margin-bottom: 22px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 13px;
+            padding: 23px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .panel-header h2 {
+            color: #124e2a;
+            font-size: 19px;
+        }
+
+        .view-link {
+            color: #176b3a;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .view-link:hover {
+            text-decoration: underline;
+        }
+
+
+        /* ================= SKILLS ================= */
+
+        .skill-row {
+            margin-bottom: 17px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .skill-name {
+            font-weight: 600;
+        }
+
+        .skill-score {
+            color: #6b7280;
+        }
+
+        .progress {
+            width: 100%;
+            height: 8px;
+            background: #e7ece8;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #176b3a;
+            border-radius: 20px;
+        }
+
+
+        /* ================= GAP ================= */
+
+        .gap-link {
+            display: block;
+            border: 1px solid #e3e8e4;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        .gap-link:hover {
+            border-color: #176b3a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .gap-link h3 {
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .gap-link p {
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .gap-level {
+            display: inline-block;
+            margin-top: 8px;
+            background: #fff5d8;
+            color: #8a6300;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+
+        /* ================= OPPORTUNITIES ================= */
+
+        .opportunity {
+            display: block;
+            border: 1px solid #e3e8e4;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        .opportunity:hover {
+            border-color: #176b3a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .opportunity h3 {
+            font-size: 14px;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+
+        .opportunity p {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .match {
+            display: inline-block;
+            margin-top: 9px;
+            background: #e4f4e9;
+            color: #176b3a;
+            border-radius: 14px;
+            padding: 5px 9px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+
+        /* ================= LEARNING ================= */
+
+        .learning-card {
+            display: block;
+            border: 1px solid #e3e8e4;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            color: inherit;
+            transition: 0.2s;
+        }
+
+        .learning-card:hover {
+            border-color: #176b3a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+        }
+
+        .learning-card h3 {
+            color: #176b3a;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .learning-card p {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .learning-tag {
+            display: inline-block;
+            margin-top: 8px;
+            background: #eef4f0;
+            color: #374151;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+        }
+
+
+        /* ================= APPLICATION ================= */
+
+        .application {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #edf0ee;
+        }
+
+        .application:last-child {
+            border-bottom: none;
+        }
+
+        .application h3 {
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .application p {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .application-view {
+            color: #176b3a;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        /* ================= QUICK ACTIONS ================= */
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 15px;
+        }
+
+        .action-card {
+            display: block;
+            color: inherit;
+            border: 1px solid #e3e8e4;
+            border-radius: 11px;
+            padding: 18px;
+            transition: 0.2s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-3px);
+            border-color: #176b3a;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+        }
+
+        .action-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .action-card h3 {
+            font-size: 14px;
+            color: #176b3a;
+            margin-bottom: 4px;
+        }
+
+        .action-card p {
+            font-size: 11px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer-note {
+            text-align: center;
+            color: #8a938d;
+            font-size: 11px;
+            padding: 25px 0 10px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width:1100px) {
+
+            .stats-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+
+        @media (max-width:800px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width:600px) {
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                padding: 15px 20px;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .profile-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <h2>
+            AYUSH SkillBridge
+        </h2>
+
+        <p>
+            Student Portal
+        </p>
+
+    </div>
+
+
+    <div class="menu-title">
+        Main Menu
+    </div>
+
+
+    <a
+        href="{{ url_for('student_dashboard') }}"
+        class="nav-item active"
+    >
+        🏠 Dashboard
+    </a>
+
+
+    <a
+        href="{{ url_for('student_profile') }}"
+        class="nav-item"
+    >
+        👤 My Profile
+    </a>
+
+
+    <a
+        href="{{ url_for('student_assessment') }}"
+        class="nav-item"
+    >
+        📝 Skill Assessment
+    </a>
+
+
+    <a
+        href="{{ url_for('student_skill_gap') }}"
+        class="nav-item"
+    >
+        📊 Skill Gap Analysis
+    </a>
+
+
+    <a
+        href="{{ url_for('student_learning') }}"
+        class="nav-item"
+    >
+        🎓 Learning Programs
+    </a>
+
+
+    <a
+        href="{{ url_for('student_opportunities') }}"
+        class="nav-item"
+    >
+        🌿 AYUSH Internships
+    </a>
+
+
+    <a
+        href="{{ url_for('student_placements') }}"
+        class="nav-item"
+    >
+        💼 Placements
+    </a>
+
+
+    <a
+        href="{{ url_for('smart_matching') }}"
+        class="nav-item"
+    >
+        🎯 Smart Matching
+    </a>
+
+
+    <div class="menu-title">
+        My Activity
+    </div>
+
+
+    <a
+        href="{{ url_for('student_applications') }}"
+        class="nav-item"
+    >
+        📋 My Applications
+    </a>
+
+
+    <a
+        href="{{ url_for('student_portfolio') }}"
+        class="nav-item"
+    >
+        🪪 Digital Portfolio
+    </a>
+
+
+    <a
+        href="{{ url_for('notifications') }}"
+        class="nav-item"
+    >
+        🔔 Notifications
+    </a>
+
+
+    <div class="logout">
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="nav-item"
+        >
+            🚪 Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <h1>
+            Student Dashboard
+        </h1>
+
+
+        <div class="profile-area">
+
+            <div class="avatar">
+                {{ name[0] | upper }}
+            </div>
+
+
+            <div class="profile-text">
+
+                <strong>
+                    {{ name }}
+                </strong>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <div class="content">
+
+
+        <!-- ================= WELCOME ================= -->
+
+        <section class="welcome">
+
+            <h2>
+                Welcome, {{ name }} 👋
+            </h2>
+
+            <p>
+                Track your skills, identify development areas,
+                discover AYUSH-sector opportunities, find suitable
+                internships and placements, and build your
+                academic-industry profile through one unified platform.
+            </p>
+
+        </section>
+
+
+
+        <!-- ================= STATS ================= -->
+
+        <section class="stats-grid">
+
+
+            <!-- Overall Skill Profile -->
+
+            <div class="stat-card">
+
+                <div>
+
+                    <h3>
+                        {{ overall_percentage }}%
+                    </h3>
+
+                    <p>
+                        Overall Skill Profile
+                    </p>
+
+                </div>
+
+                <div class="stat-icon">
+                    📊
+                </div>
+
+            </div>
+
+
+
+            <!-- Skill Gaps -->
+
+            <a
+                href="{{ url_for('student_skill_gap') }}"
+                class="stat-card"
+            >
+
+                <div>
+
+                    <h3>
+                        {{ skill_gap_count }}
+                    </h3>
+
+                    <p>
+                        Skill Gaps Identified
+                    </p>
+
+                </div>
+
+                <div class="stat-icon">
+                    🎯
+                </div>
+
+            </a>
+
+
+
+            <!-- Matched Opportunities -->
+
+            <a
+                href="{{ url_for('smart_matching') }}"
+                class="stat-card"
+            >
+
+                <div>
+
+                    <h3>
+                        {{ matched_opportunities }}
+                    </h3>
+
+                    <p>
+                        Matched Opportunities
+                    </p>
+
+                </div>
+
+                <div class="stat-icon">
+                    🔎
+                </div>
+
+            </a>
+
+
+
+            <!-- Applications -->
+
+            <a
+                href="{{ url_for('student_applications') }}"
+                class="stat-card"
+            >
+
+                <div>
+
+                    <h3>
+                        {{ application_count }}
+                    </h3>
+
+                    <p>
+                        Applications
+                    </p>
+
+                </div>
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+            </a>
+
+        </section>
+
+
+
+        <!-- ================= SKILL + GAP ================= -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- Skill Profile -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Your Skill Profile
+                    </h2>
+
+                    <a
+                        href="{{ url_for('student_assessment') }}"
+                        class="view-link"
+                    >
+                        View Details →
+                    </a>
+
+                </div>
+
+
+                {% if skill_categories %}
+
+
+                    {% for skill in skill_categories %}
+
+                    <div class="skill-row">
+
+                        <div class="skill-info">
+
+                            <span class="skill-name">
+                                {{ skill.category }}
+                            </span>
+
+                            <span class="skill-score">
+                                {{ skill.percentage }}%
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                style="width: {{ skill.percentage }}%;"
+                            >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+
+                {% else %}
+
+                    <p
+                        style="color:#6b7280; font-size:13px;"
+                    >
+                        Complete your skill assessment to see your skill profile.
+                    </p>
+
+
+                    <a
+                        href="{{ url_for('student_assessment') }}"
+                        class="view-link"
+                        style="display:inline-block; margin-top:12px;"
+                    >
+                        Start Assessment →
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- Skill Gap -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Skill Gap Analysis
+                    </h2>
+
+                    <a
+                        href="{{ url_for('student_skill_gap') }}"
+                        class="view-link"
+                    >
+                        Analyze →
+                    </a>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('student_skill_gap') }}"
+                    class="gap-link"
+                >
+
+                    <h3>
+                        Identify Development Areas
+                    </h3>
+
+                    <p>
+                        Analyze your assessment results and identify
+                        skills that need improvement.
+                    </p>
+
+                    <span class="gap-level">
+                        View Analysis →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('student_learning') }}"
+                    class="gap-link"
+                >
+
+                    <h3>
+                        Personalized Recommendations
+                    </h3>
+
+                    <p>
+                        Get learning recommendations based on your
+                        identified skill gaps.
+                    </p>
+
+                    <span class="gap-level">
+                        View Learning →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= OPPORTUNITIES + LEARNING ================= -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- AYUSH Opportunities -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        AYUSH Opportunities
+                    </h2>
+
+                    <a
+                        href="{{ url_for('student_opportunities') }}"
+                        class="view-link"
+                    >
+                        Explore All →
+                    </a>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('student_opportunities') }}"
+                    class="opportunity"
+                >
+
+                    <h3>
+                        AYUSH Research Internship
+                    </h3>
+
+                    <p>
+                        Research, documentation and
+                        evidence-based project work.
+                    </p>
+
+                    <span class="match">
+                        Explore Opportunity →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('student_opportunities') }}"
+                    class="opportunity"
+                >
+
+                    <h3>
+                        Digital Health Project Internship
+                    </h3>
+
+                    <p>
+                        Digital health, data and technology-based
+                        project opportunities.
+                    </p>
+
+                    <span class="match">
+                        View Opportunities →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('student_opportunities') }}"
+                    class="opportunity"
+                >
+
+                    <h3>
+                        Healthcare Innovation Project
+                    </h3>
+
+                    <p>
+                        Industry–academia innovation and applied
+                        healthcare project collaboration.
+                    </p>
+
+                    <span class="match">
+                        Discover More →
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- Learning -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Recommended Learning
+                    </h2>
+
+                    <a
+                        href="{{ url_for('student_learning') }}"
+                        class="view-link"
+                    >
+                        View All →
+                    </a>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('student_learning') }}"
+                    class="learning-card"
+                >
+
+                    <h3>
+                        Research Methodology
+                    </h3>
+
+                    <p>
+                        Strengthen research planning, documentation
+                        and evidence-based analysis.
+                    </p>
+
+                    <span class="learning-tag">
+                        Skill Gap Based • View Program →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('student_learning') }}"
+                    class="learning-card"
+                >
+
+                    <h3>
+                        Digital Health Fundamentals
+                    </h3>
+
+                    <p>
+                        Build foundational knowledge in digital
+                        healthcare systems.
+                    </p>
+
+                    <span class="learning-tag">
+                        Recommended • View Program →
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('student_learning') }}"
+                    class="learning-card"
+                >
+
+                    <h3>
+                        Healthcare Data Interpretation
+                    </h3>
+
+                    <p>
+                        Improve analytical skills for healthcare-related datasets.
+                    </p>
+
+                    <span class="learning-tag">
+                        Career Development • View Program →
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= SMART MATCHING ================= -->
+
+        <section
+            class="panel"
+            style="margin-bottom:22px;"
+        >
+
+            <div class="panel-header">
+
+                <h2>
+                    🎯 Smart Skill Matching
+                </h2>
+
+                <a
+                    href="{{ url_for('smart_matching') }}"
+                    class="view-link"
+                >
+                    Open Matching →
+                </a>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('smart_matching') }}"
+                class="opportunity"
+            >
+
+                <h3>
+                    Find Opportunities That Match Your Skills
+                </h3>
+
+                <p>
+                    Our matching system compares your assessed skills
+                    and career interest with available AYUSH internships,
+                    projects and opportunities.
+                </p>
+
+                <span class="match">
+                    Find My Best Matches →
+                </span>
+
+            </a>
+
+        </section>
+
+
+
+        <!-- ================= PLACEMENTS ================= -->
+
+        <section
+            class="panel"
+            style="margin-bottom:22px;"
+        >
+
+            <div class="panel-header">
+
+                <h2>
+                    Placements
+                </h2>
+
+                <a
+                    href="{{ url_for('student_placements') }}"
+                    class="view-link"
+                >
+                    Explore Jobs →
+                </a>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('student_placements') }}"
+                class="opportunity"
+            >
+
+                <h3>
+                    View AYUSH & Healthcare Jobs
+                </h3>
+
+                <p>
+                    Explore available placement and job opportunities
+                    suitable for your profile.
+                </p>
+
+                <span class="match">
+                    View Placements →
+                </span>
+
+            </a>
+
+        </section>
+
+
+
+        <!-- ================= APPLICATIONS ================= -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    My Applications
+                </h2>
+
+                <a
+                    href="{{ url_for('student_applications') }}"
+                    class="view-link"
+                >
+                    View All →
+                </a>
+
+            </div>
+
+
+            {% if application_count > 0 %}
+
+            <div class="application">
+
+                <div>
+
+                    <h3>
+                        Applications Submitted
+                    </h3>
+
+                    <p>
+                        You currently have
+                        {{ application_count }}
+                        application(s) submitted.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('student_applications') }}"
+                    class="application-view"
+                >
+                    View →
+                </a>
+
+            </div>
+
+
+            {% else %}
+
+
+            <div class="application">
+
+                <div>
+
+                    <h3>
+                        No Applications Yet
+                    </h3>
+
+                    <p>
+                        Explore AYUSH internships and projects
+                        and submit your first application.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('student_opportunities') }}"
+                    class="application-view"
+                >
+                    Explore →
+                </a>
+
+            </div>
+
+
+            {% endif %}
+
+        </section>
+
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <section
+            class="panel"
+            style="margin-top:22px;"
+        >
+
+            <div class="panel-header">
+
+                <h2>
+                    Quick Actions
+                </h2>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <a
+                    href="{{ url_for('student_assessment') }}"
+                    class="action-card"
+                >
+
+                    <div class="action-icon">
+                        📝
+                    </div>
+
+                    <h3>
+                        Start Skill Assessment →
+                    </h3>
+
+                    <p>
+                        Evaluate your domain, soft-skill,
+                        analytical and aptitude competencies.
+                    </p>
+
+                </a>
+
+
+
+                <a
+                    href="{{ url_for('student_skill_gap') }}"
+                    class="action-card"
+                >
+
+                    <div class="action-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        Analyze Skill Gap →
+                    </h3>
+
+                    <p>
+                        Identify areas that need improvement
+                        based on your assessment.
+                    </p>
+
+                </a>
+
+
+
+                <a
+                    href="{{ url_for('student_learning') }}"
+                    class="action-card"
+                >
+
+                    <div class="action-icon">
+                        🎓
+                    </div>
+
+                    <h3>
+                        View Learning Programs →
+                    </h3>
+
+                    <p>
+                        Explore learning recommendations
+                        based on your skill gaps.
+                    </p>
+
+                </a>
+
+
+
+                <a
+                    href="{{ url_for('smart_matching') }}"
+                    class="action-card"
+                >
+
+                    <div class="action-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        Smart Skill Matching →
+                    </h3>
+
+                    <p>
+                        Find internships and projects that
+                        match your skills and interests.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <div class="footer-note">
+
+            AYUSH SkillBridge • SIH26044 • Proposed Solution for Ministry of Ayush Problem Statement
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

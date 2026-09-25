@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Placement Analytics - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f6;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #0f5132;
+            color: white;
+            padding: 25px 18px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: #d7f5e5;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 13px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #198754;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 25px;
+            left: 18px;
+            right: 18px;
+            background: #dc3545 !important;
+            text-align: center;
+        }
+
+        .logout:hover {
+            background: #bb2d3b !important;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 22px 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .header h1 {
+            color: #0f5132;
+            font-size: 28px;
+            margin-bottom: 7px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            border-left: 5px solid #198754;
+        }
+
+        .stat-card h3 {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .number {
+            color: #0f5132;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .section-title {
+            color: #0f5132;
+            font-size: 22px;
+            margin-bottom: 18px;
+        }
+
+        .table-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            overflow-x: auto;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #eaf6ef;
+            color: #0f5132;
+            padding: 14px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .approved {
+            background: #d7f5e5;
+            color: #0f5132;
+        }
+
+        .rejected {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .submitted {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+
+        .info-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .info-box h2 {
+            color: #0f5132;
+            margin-bottom: 12px;
+        }
+
+        .info-box p {
+            color: #6b7280;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1000px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Institution Portal</p>
+        </div>
+
+        <div class="menu">
+
+            <a href="{{ url_for('institution_dashboard') }}">
+                🏠 Dashboard
+            </a>
+
+            <a href="{{ url_for('institution_students') }}">
+                👨‍🎓 Students
+            </a>
+
+            <a href="{{ url_for('institution_academicians') }}">
+                👩‍🏫 Academicians
+            </a>
+
+            <a href="{{ url_for('institution_opportunities') }}">
+                💼 Opportunities
+            </a>
+
+            <a href="{{ url_for('institution_skill_analytics') }}">
+                📊 Skill Analytics
+            </a>
+
+            <a href="{{ url_for('institution_placement_analytics') }}" class="active">
+                📈 Placement Analytics
+            </a>
+
+            <a href="#">
+                📄 Reports
+            </a>
+
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="menu logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <!-- Main -->
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Placement Analytics</h1>
+
+            <p>
+                Track student applications, selections, rejected applications
+                and overall placement progress.
+            </p>
+
+        </div>
+
+
+        <!-- Statistics -->
+        <div class="stats">
+
+            <div class="stat-card">
+                <h3>Total Applications</h3>
+
+                <div class="number">
+                    {{ total_applications }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Approved Applications</h3>
+
+                <div class="number">
+                    {{ approved_applications }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Rejected Applications</h3>
+
+                <div class="number">
+                    {{ rejected_applications }}
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <h3>Pending Applications</h3>
+
+                <div class="number">
+                    {{ pending_applications }}
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Placement Opportunities -->
+        <h2 class="section-title">
+            Placement & Job Applications
+        </h2>
+
+        <div class="table-box">
+
+            {% if placement_applications %}
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Opportunity</th>
+                        <th>Organization</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Applied On</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for application in placement_applications %}
+
+                    <tr>
+
+                        <td>
+                            <strong>
+                                {{ application["student_name"] }}
+                            </strong>
+                        </td>
+
+                        <td>
+                            {{ application["title"] }}
+                        </td>
+
+                        <td>
+                            {{ application["organization"] or "Not Available" }}
+                        </td>
+
+                        <td>
+                            {{ application["opportunity_type"] }}
+                        </td>
+
+                        <td>
+
+                            {% if application["status"] == "Approved" %}
+
+                                <span class="badge approved">
+                                    Approved
+                                </span>
+
+                            {% elif application["status"] == "Rejected" %}
+
+                                <span class="badge rejected">
+                                    Rejected
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge submitted">
+                                    {{ application["status"] }}
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ application["applied_at"] or "N/A" }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+            {% else %}
+
+            <div class="empty">
+
+                <h3>No Placement Applications</h3>
+
+                <p style="margin-top: 10px;">
+                    No placement or job applications are currently available.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Information -->
+        <div class="info-box">
+
+            <h2>About Placement Analytics</h2>
+
+            <p>
+                This section helps institutions monitor the progress of
+                student applications for placement and job opportunities.
+                Institutions can use these insights to understand selection
+                trends, identify placement gaps and strengthen industry
+                engagement.
+            </p>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

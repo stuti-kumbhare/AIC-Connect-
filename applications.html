@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications - AYUSH SkillBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #14532d;
+            color: white;
+            padding: 24px 18px;
+            overflow-y: auto;
+        }
+
+        .brand {
+            padding: 5px 12px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 18px;
+        }
+
+        .brand h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .brand p {
+            font-size: 11px;
+            color: #d1fae5;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #bbf7d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 11px 13px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255,255,255,0.13);
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 18px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 17px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar h1 {
+            font-size: 23px;
+            color: #14532d;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-text span {
+            display: block;
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 32px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #e6f5eb, #f2faf4);
+            border: 1px solid #d6ebdc;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .hero h2 {
+            color: #124e2a;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #5f6b63;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 780px;
+        }
+
+        /* ================= APPLICATION CARDS ================= */
+
+        .application-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .application-card {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 13px;
+            padding: 21px;
+        }
+
+        .application-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 12px;
+        }
+
+        .application-card h2 {
+            color: #124e2a;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .organization {
+            color: #176b3a;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-submitted,
+        .status-review {
+            background: #fff4d9;
+            color: #8b6500;
+        }
+
+        .status-shortlisted {
+            background: #e6efff;
+            color: #315a9e;
+        }
+
+        .status-selected {
+            background: #e4f4e9;
+            color: #176b3a;
+        }
+
+        .status-rejected {
+            background: #fde8e8;
+            color: #a33a3a;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background: #f8faf8;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .info-item span {
+            display: block;
+            color: #8a938d;
+            font-size: 9px;
+            margin-bottom: 4px;
+        }
+
+        .info-item strong {
+            color: #374151;
+            font-size: 11px;
+        }
+
+        .application-note {
+            border-top: 1px solid #edf0ee;
+            margin-top: 15px;
+            padding-top: 14px;
+        }
+
+        .application-note h3 {
+            color: #374151;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .application-note p {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .applied-date {
+            margin-top: 12px;
+            color: #8a938d;
+            font-size: 10px;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty-box {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 13px;
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .empty-box h2 {
+            color: #14532d;
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .empty-box p {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .browse-btn {
+            display: inline-block;
+            background: #14532d;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .browse-btn:hover {
+            background: #176b3a;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer-note {
+            text-align: center;
+            color: #8a938d;
+            font-size: 11px;
+            padding: 30px 0 10px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .application-header {
+                flex-direction: column;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= COMMON SIDEBAR ================= -->
+
+{% include '_sidebar.html' %}
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+    <header class="topbar">
+
+        <h1>
+            My Applications
+        </h1>
+
+
+        <div class="profile-area">
+
+            <div class="avatar">
+                {{ name[0] | upper }}
+            </div>
+
+
+            <div class="profile-text">
+
+                <strong>
+                    {{ name }}
+                </strong>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <div class="content">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <h2>
+                Track Your Applications 📋
+            </h2>
+
+            <p>
+                View the opportunities you have applied for and
+                track the current status of your applications
+                through the AYUSH SkillBridge platform.
+            </p>
+
+        </section>
+
+
+        {% if applications %}
+
+        <div class="application-list">
+
+
+            {% for application in applications %}
+
+            <div class="application-card">
+
+
+                <div class="application-header">
+
+                    <div>
+
+                        <h2>
+                            {{ application["title"] }}
+                        </h2>
+
+                        <div class="organization">
+                            {{ application["organization"] }}
+                        </div>
+
+                    </div>
+
+
+                    {% set status = application["status"]|lower|replace(" ", "_") %}
+
+
+                    {% if status == "submitted" %}
+
+                        <span class="status status-submitted">
+                            Submitted
+                        </span>
+
+                    {% elif status == "under_review" %}
+
+                        <span class="status status-review">
+                            Under Review
+                        </span>
+
+                    {% elif status == "shortlisted" %}
+
+                        <span class="status status-shortlisted">
+                            Shortlisted
+                        </span>
+
+                    {% elif status == "selected" %}
+
+                        <span class="status status-selected">
+                            Selected
+                        </span>
+
+                    {% elif status == "rejected" %}
+
+                        <span class="status status-rejected">
+                            Rejected
+                        </span>
+
+                    {% else %}
+
+                        <span class="status status-submitted">
+                            {{ application["status"] }}
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="info-grid">
+
+
+                    <div class="info-item">
+
+                        <span>
+                            Type
+                        </span>
+
+                        <strong>
+                            {{ application["opportunity_type"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span>
+                            Domain
+                        </span>
+
+                        <strong>
+                            {{ application["domain"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span>
+                            Location
+                        </span>
+
+                        <strong>
+                            {{ application["location"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <span>
+                            Mode
+                        </span>
+
+                        <strong>
+                            {{ application["mode"] }}
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                {% if application["cover_note"] %}
+
+                <div class="application-note">
+
+                    <h3>
+                        Your Application Note
+                    </h3>
+
+                    <p>
+                        {{ application["cover_note"] }}
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+
+                <div class="applied-date">
+
+                    Applied on:
+                    {{ application["applied_at"] }}
+
+                </div>
+
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-box">
+
+            <div class="empty-icon">
+                📋
+            </div>
+
+            <h2>
+                No Applications Yet
+            </h2>
+
+            <p>
+                You haven't applied to any opportunities yet.
+                Explore available AYUSH internships and projects.
+            </p>
+
+            <a href="{{ url_for('student_opportunities') }}"
+               class="browse-btn">
+
+                Explore Opportunities →
+
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+        <div class="footer-note">
+
+            AYUSH SkillBridge • SIH26044 • Proposed Solution for Ministry of Ayush Problem Statement
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>

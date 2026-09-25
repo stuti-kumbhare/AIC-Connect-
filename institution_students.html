@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f6;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            position: fixed;
+            width: 250px;
+            height: 100vh;
+            background: #0f5132;
+            padding: 25px 18px;
+            color: white;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo h2 {
+            font-size: 22px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            margin-top: 5px;
+            color: #d7f5e5;
+        }
+
+        .menu a {
+            display: block;
+            text-decoration: none;
+            color: white;
+            padding: 13px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #198754;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 25px;
+            left: 18px;
+            right: 18px;
+            background: #dc3545 !important;
+            text-align: center;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .header h1 {
+            color: #0f5132;
+            margin-bottom: 7px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .table-box {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #eaf6ef;
+            color: #0f5132;
+            padding: 14px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background: #f8fbf9;
+        }
+
+        .badge {
+            background: #d7f5e5;
+            color: #0f5132;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Institution Portal</p>
+        </div>
+
+        <div class="menu">
+
+            <a href="{{ url_for('institution_dashboard') }}">
+                🏠 Dashboard
+            </a>
+
+            <a href="{{ url_for('institution_students') }}" class="active">
+                👨‍🎓 Students
+            </a>
+
+            <a href="#">
+                👩‍🏫 Academicians
+            </a>
+
+            <a href="#">
+                💼 Opportunities
+            </a>
+
+            <a href="#">
+                📊 Skill Analytics
+            </a>
+
+            <a href="#">
+                📈 Placement Analytics
+            </a>
+
+            <a href="#">
+                📄 Reports
+            </a>
+
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="menu logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+            <h1>Student Management</h1>
+            <p>
+                View registered students, academic information,
+                skills and career interests.
+            </p>
+        </div>
+
+
+        <div class="table-box">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Course</th>
+                        <th>Institution</th>
+                        <th>Career Interest</th>
+                        <th>Skills</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for student in students %}
+
+                    <tr>
+
+                        <td>
+                            <strong>{{ student["name"] }}</strong>
+                        </td>
+
+                        <td>
+                            {{ student["email"] }}
+                        </td>
+
+                        <td>
+                            {{ student["course"] or "Not Updated" }}
+                        </td>
+
+                        <td>
+                            {{ student["institution"] or "Not Updated" }}
+                        </td>
+
+                        <td>
+                            {{ student["career_interest"] or "Not Updated" }}
+                        </td>
+
+                        <td>
+                            <span class="badge">
+                                {{ student["skills"] or "Not Updated" }}
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="6" class="empty">
+                            No student records available.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

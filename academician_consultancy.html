@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultancy - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 25px 18px;
+        }
+
+        .brand h2 {
+            color: #166534;
+            font-size: 22px;
+        }
+
+        .brand p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            margin: 30px 10px 12px;
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-item {
+            display: block;
+            text-decoration: none;
+            color: #374151;
+            padding: 12px 14px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+        }
+
+        .nav-item:hover {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .active {
+            background: #166534;
+            color: white;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 36px);
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
+        }
+
+        .header h1 {
+            color: #14532d;
+            font-size: 30px;
+        }
+
+        .header p {
+            color: #6b7280;
+            margin-top: 8px;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .card h3 {
+            color: #166534;
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 15px;
+            margin-right: 6px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 12px;
+        }
+
+        .info {
+            background: #f0fdf4;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 18px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 18px;
+            background: #166534;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #14532d;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Academician Portal</p>
+        </div>
+
+        <div class="menu-title">Main Menu</div>
+
+        <a href="{{ url_for('academician_dashboard') }}" class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="{{ url_for('academician_faculty_opportunities') }}" class="nav-item">
+            👨‍🏫 Faculty Opportunities
+        </a>
+
+        <a href="{{ url_for('academician_industrial_training') }}" class="nav-item">
+            🏭 Industrial Training
+        </a>
+
+        <a href="{{ url_for('academician_research_projects') }}" class="nav-item">
+            🔬 Research Projects
+        </a>
+
+        <a href="{{ url_for('academician_fdp_workshops') }}" class="nav-item">
+            🎓 FDP & Workshops
+        </a>
+
+        <a href="{{ url_for('academician_consultancy') }}" class="nav-item active">
+            💼 Consultancy
+        </a>
+
+        <a href="{{ url_for('academician_collaboration') }}" class="nav-item">
+            🤝 Collaboration
+        </a>
+
+        <div class="logout">
+            <a href="{{ url_for('logout') }}" class="nav-item">
+                🚪 Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+            <h1>Consultancy Opportunities</h1>
+            <p>
+                Connect academicians with organisations for AYUSH,
+                healthcare, research and technology-based consultancy.
+            </p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>AYUSH Research Consultancy</h3>
+
+                <p>
+                    Provide academic and research expertise to organisations
+                    working on AYUSH research, documentation and innovation.
+                </p>
+
+                <span class="tag">Research</span>
+                <span class="tag">AYUSH</span>
+
+                <div class="info">
+                    <b>Area:</b> Research & Documentation<br>
+                    <b>Mode:</b> Hybrid<br>
+                    <b>Engagement:</b> Project Based
+                </div>
+
+                <a href="#" class="btn">View Consultancy</a>
+            </div>
+
+
+            <div class="card">
+                <h3>Digital Healthcare Consultancy</h3>
+
+                <p>
+                    Consultancy opportunity for academicians with expertise
+                    in digital healthcare systems, data and technology.
+                </p>
+
+                <span class="tag">Digital Health</span>
+                <span class="tag">Technology</span>
+
+                <div class="info">
+                    <b>Area:</b> Digital Healthcare<br>
+                    <b>Mode:</b> Hybrid<br>
+                    <b>Engagement:</b> Short Term
+                </div>
+
+                <a href="#" class="btn">View Consultancy</a>
+            </div>
+
+
+            <div class="card">
+                <h3>Healthcare Data Analytics</h3>
+
+                <p>
+                    Organisations can collaborate with academicians for
+                    data analysis, reporting and healthcare insights.
+                </p>
+
+                <span class="tag">Data Analytics</span>
+                <span class="tag">Healthcare</span>
+
+                <div class="info">
+                    <b>Area:</b> Analytics & Reporting<br>
+                    <b>Mode:</b> Remote / Hybrid<br>
+                    <b>Engagement:</b> Project Based
+                </div>
+
+                <a href="#" class="btn">View Consultancy</a>
+            </div>
+
+
+            <div class="card">
+                <h3>Curriculum & Skill Consultancy</h3>
+
+                <p>
+                    Academic experts can support institutions and industry
+                    partners in curriculum design, skill mapping and training.
+                </p>
+
+                <span class="tag">Skill Mapping</span>
+                <span class="tag">Training</span>
+
+                <div class="info">
+                    <b>Area:</b> Curriculum & Skills<br>
+                    <b>Mode:</b> Online / Hybrid<br>
+                    <b>Engagement:</b> Consultancy
+                </div>
+
+                <a href="#" class="btn">View Consultancy</a>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

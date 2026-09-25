@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Opportunity - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 25px 18px;
+        }
+
+        .brand h2 {
+            color: #166534;
+            font-size: 22px;
+        }
+
+        .brand p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            margin: 30px 10px 12px;
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-item {
+            display: block;
+            text-decoration: none;
+            color: #374151;
+            padding: 12px 14px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+        }
+
+        .nav-item:hover {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .active {
+            background: #166534;
+            color: white;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 36px);
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
+        }
+
+        .header h1 {
+            color: #14532d;
+            font-size: 30px;
+        }
+
+        .header p {
+            color: #6b7280;
+            margin-top: 8px;
+            margin-bottom: 30px;
+        }
+
+        .form-card {
+            background: white;
+            max-width: 900px;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #374151;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #166534;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .btn {
+            border: none;
+            background: #166534;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 9px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #14532d;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-left: 10px;
+            text-decoration: none;
+            background: #e5e7eb;
+            color: #374151;
+            padding: 12px 18px;
+            border-radius: 9px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Industry Portal</p>
+        </div>
+
+        <div class="menu-title">Main Menu</div>
+
+        <a href="{{ url_for('industry_dashboard') }}" class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="{{ url_for('industry_post_opportunity') }}" class="nav-item active">
+            📢 Post Opportunities
+        </a>
+
+        <a href="#" class="nav-item">
+            👨‍🎓 Student Applications
+        </a>
+
+        <a href="#" class="nav-item">
+            🔎 Find Talent
+        </a>
+
+        <a href="#" class="nav-item">
+            🤝 Collaborations
+        </a>
+
+        <a href="#" class="nav-item">
+            📊 Analytics
+        </a>
+
+        <div class="logout">
+            <a href="{{ url_for('logout') }}" class="nav-item">
+                🚪 Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+            <h1>Post New Opportunity</h1>
+            <p>
+                Publish internships, jobs, projects and training
+                opportunities for students.
+            </p>
+        </div>
+
+        <div class="form-card">
+
+            <form method="POST">
+
+                <div class="form-group">
+                    <label>Opportunity Title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        placeholder="e.g. AYUSH Research Internship"
+                        required
+                    >
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group">
+                        <label>Opportunity Type</label>
+
+                        <select name="opportunity_type" required>
+                            <option value="">Select Type</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Project">Project</option>
+                            <option value="Placement">Placement</option>
+                            <option value="Job">Job</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Domain</label>
+
+                        <select name="domain" required>
+                            <option value="">Select Domain</option>
+                            <option value="AYUSH">AYUSH</option>
+                            <option value="Digital Health">Digital Health</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Research">Research</option>
+                            <option value="AI & Data Science">AI & Data Science</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="form-group">
+                        <label>Location</label>
+
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="e.g. Bhopal / Remote"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mode</label>
+
+                        <select name="mode" required>
+                            <option value="">Select Mode</option>
+                            <option value="On-site">On-site</option>
+                            <option value="Remote">Remote</option>
+                            <option value="Hybrid">Hybrid</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="form-group">
+                        <label>Duration</label>
+
+                        <input
+                            type="text"
+                            name="duration"
+                            placeholder="e.g. 3 Months"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label>Stipend / Salary</label>
+
+                        <input
+                            type="text"
+                            name="stipend"
+                            placeholder="e.g. ₹10,000 / month"
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label>Required Skills</label>
+
+                    <input
+                        type="text"
+                        name="required_skills"
+                        placeholder="e.g. Python, Research, Data Analysis"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Eligibility</label>
+
+                    <input
+                        type="text"
+                        name="eligibility"
+                        placeholder="e.g. Final year students / Graduates"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Application Deadline</label>
+
+                    <input
+                        type="date"
+                        name="deadline"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label>Opportunity Description</label>
+
+                    <textarea
+                        name="description"
+                        placeholder="Describe the opportunity, responsibilities and requirements..."
+                        required
+                    ></textarea>
+                </div>
+
+
+                <button type="submit" class="btn">
+                    Publish Opportunity
+                </button>
+
+                <a
+                    href="{{ url_for('industry_dashboard') }}"
+                    class="back-btn"
+                >
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

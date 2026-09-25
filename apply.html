@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Apply - AYUSH SkillBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #14532d;
+            color: white;
+            padding: 24px 18px;
+            overflow-y: auto;
+        }
+
+        .brand {
+            padding: 5px 12px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 18px;
+        }
+
+        .brand h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .brand p {
+            font-size: 11px;
+            color: #d1fae5;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #bbf7d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 11px 13px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255,255,255,0.13);
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 18px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 17px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .topbar h1 {
+            font-size: 23px;
+            color: #14532d;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-text span {
+            display: block;
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 32px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #176b3a;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .form-card {
+            max-width: 850px;
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .form-card h2 {
+            color: #124e2a;
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .organization {
+            color: #176b3a;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .intro {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .opportunity-summary {
+            background: #f4f8f5;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 25px;
+        }
+
+        .summary-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .summary-item span {
+            display: block;
+            color: #8a938d;
+            font-size: 10px;
+            margin-bottom: 4px;
+        }
+
+        .summary-item strong {
+            color: #374151;
+            font-size: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #374151;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .form-group textarea,
+        .form-group input {
+            width: 100%;
+            border: 1px solid #dfe5e1;
+            border-radius: 8px;
+            padding: 11px 12px;
+            font-size: 13px;
+            outline: none;
+            background: white;
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-group textarea:focus,
+        .form-group input:focus {
+            border-color: #176b3a;
+        }
+
+        .help-text {
+            margin-top: 5px;
+            color: #8a938d;
+            font-size: 10px;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            border: none;
+            background: #14532d;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #176b3a;
+        }
+
+        .cancel-btn {
+            display: inline-block;
+            margin-left: 10px;
+            text-decoration: none;
+            color: #176b3a;
+            background: #eef4f0;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .note {
+            margin-top: 18px;
+            color: #8a938d;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #8a938d;
+            font-size: 11px;
+            padding: 30px 0 10px;
+        }
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .summary-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <h2>
+            AYUSH SkillBridge
+        </h2>
+
+        <p>
+            Student Portal
+        </p>
+
+    </div>
+
+
+    <div class="menu-title">
+        Main Menu
+    </div>
+
+
+    <a href="{{ url_for('student_dashboard') }}"
+       class="nav-item">
+
+        🏠 Dashboard
+
+    </a>
+
+
+    <a href="{{ url_for('student_profile') }}"
+       class="nav-item">
+
+        👤 My Profile
+
+    </a>
+
+
+    <a href="{{ url_for('student_assessment') }}"
+       class="nav-item">
+
+        📝 Skill Assessment
+
+    </a>
+
+
+    <a href="{{ url_for('student_skill_gap') }}"
+       class="nav-item">
+
+        📊 Skill Gap Analysis
+
+    </a>
+
+
+    <a href="{{ url_for('student_learning') }}"
+       class="nav-item">
+
+        🎓 Learning Programs
+
+    </a>
+
+
+    <a href="{{ url_for('student_opportunities') }}"
+       class="nav-item active">
+
+        🌿 AYUSH Internships
+
+    </a>
+
+
+    <a href="#"
+       class="nav-item">
+
+        💼 Placements
+
+    </a>
+
+
+    <div class="menu-title">
+        My Activity
+    </div>
+
+
+    <a href="{{ url_for('student_applications') }}"
+       class="nav-item">
+
+        📋 My Applications
+
+    </a>
+
+
+    <a href="#"
+       class="nav-item">
+
+        🪪 Digital Portfolio
+
+    </a>
+
+
+    <a href="#"
+       class="nav-item">
+
+        🔔 Notifications
+
+    </a>
+
+
+    <div class="logout">
+
+        <a href="{{ url_for('logout') }}"
+           class="nav-item">
+
+            🚪 Logout
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+    <header class="topbar">
+
+        <h1>
+            Apply for Opportunity
+        </h1>
+
+
+        <div class="profile-area">
+
+            <div class="avatar">
+
+                {{ name[0] | upper }}
+
+            </div>
+
+
+            <div class="profile-text">
+
+                <strong>
+                    {{ name }}
+                </strong>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <div class="content">
+
+
+        <a href="{{ url_for('student_opportunity_details', opportunity_id=opportunity['id']) }}"
+           class="back-link">
+
+            ← Back to Opportunity
+
+        </a>
+
+
+        <section class="form-card">
+
+            <h2>
+                {{ opportunity["title"] }}
+            </h2>
+
+            <div class="organization">
+
+                {{ opportunity["organization"] }}
+
+            </div>
+
+
+            <p class="intro">
+
+                Complete the application form below to submit your
+                interest in this opportunity.
+
+            </p>
+
+
+            <div class="opportunity-summary">
+
+
+                <div class="summary-row">
+
+                    <div class="summary-item">
+
+                        <span>
+                            Opportunity Type
+                        </span>
+
+                        <strong>
+                            {{ opportunity["opportunity_type"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-item">
+
+                        <span>
+                            Domain
+                        </span>
+
+                        <strong>
+                            {{ opportunity["domain"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-item">
+
+                        <span>
+                            Location
+                        </span>
+
+                        <strong>
+                            {{ opportunity["location"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-item">
+
+                        <span>
+                            Mode
+                        </span>
+
+                        <strong>
+                            {{ opportunity["mode"] }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- APPLICATION FORM -->
+
+            <form method="POST"
+                  action="{{ url_for('apply_opportunity', opportunity_id=opportunity['id']) }}">
+
+
+                <div class="form-group">
+
+                    <label for="cover_note">
+                        Why are you interested in this opportunity?
+                    </label>
+
+                    <textarea
+                        id="cover_note"
+                        name="cover_note"
+                        placeholder="Write a short note about your interest, skills and motivation..."
+                        required></textarea>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="resume_file">
+                        Resume / Portfolio Reference
+                    </label>
+
+                    <input
+                        type="text"
+                        id="resume_file"
+                        name="resume_file"
+                        placeholder="Enter your resume file name or portfolio reference">
+
+                    <div class="help-text">
+                        Example: Stuti_Resume.pdf
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-btn">
+
+                    Submit Application →
+
+                </button>
+
+
+                <a href="{{ url_for('student_opportunity_details', opportunity_id=opportunity['id']) }}"
+                   class="cancel-btn">
+
+                    Cancel
+
+                </a>
+
+
+            </form>
+
+
+            <div class="note">
+
+                This is a prototype application workflow for
+                AYUSH SkillBridge. Submitted applications are stored
+                in the local project database for demonstration.
+
+            </div>
+
+        </section>
+
+
+
+        <div class="footer-note">
+
+            AYUSH SkillBridge • SIH26044 • Proposed Solution for Ministry of Ayush Problem Statement
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,365 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #eef8f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 1050px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 0.9fr 1.4fr;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.10);
+        }
+
+        .left-panel {
+            background: #176b3a;
+            color: white;
+            padding: 55px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .badge {
+            display: inline-block;
+            width: fit-content;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .left-panel h1 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .left-panel h2 {
+            font-size: 21px;
+            font-weight: normal;
+            margin-bottom: 18px;
+        }
+
+        .left-panel p {
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        .benefits {
+            margin-top: 30px;
+        }
+
+        .benefit {
+            margin-bottom: 13px;
+            font-size: 14px;
+        }
+
+        .right-panel {
+            padding: 45px 50px;
+        }
+
+        .right-panel h2 {
+            color: #124e2a;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #176b3a;
+        }
+
+        .register-btn {
+            width: 100%;
+            border: none;
+            background: #176b3a;
+            color: white;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 25px;
+        }
+
+        .register-btn:hover {
+            background: #12552e;
+        }
+
+        .login-text {
+            text-align: center;
+            color: #6b7280;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: #176b3a;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .back-home a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+            .register-container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-panel {
+                padding: 40px 30px;
+            }
+
+            .right-panel {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <!-- LEFT PANEL -->
+        <div class="left-panel">
+
+            <div class="badge">
+                SIH26044 • Ministry of Ayush
+            </div>
+
+            <h1>Join AYUSH SkillBridge</h1>
+
+            <h2>Build Skills. Discover Opportunities.</h2>
+
+            <p>
+                Create your account and become part of a connected
+                ecosystem for skill development, internships,
+                placements and academia–industry collaboration.
+            </p>
+
+            <div class="benefits">
+                <div class="benefit">✓ Skill Assessment & Profiling</div>
+                <div class="benefit">✓ Smart Internship & Job Matching</div>
+                <div class="benefit">✓ Industry Learning Programs</div>
+                <div class="benefit">✓ Digital Portfolio</div>
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT PANEL -->
+        <div class="right-panel">
+
+            <h2>Create Account</h2>
+
+            <p class="subtitle">
+                Register to access AYUSH SkillBridge.
+            </p>
+
+            <form method="POST" action="/register">
+
+                <div class="form-grid">
+
+                    <!-- FULL NAME -->
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- EMAIL -->
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- PASSWORD -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+                    <div class="form-group">
+                        <label for="confirm_password">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- ROLE -->
+                    <div class="form-group full-width">
+                        <label for="role">Register As</label>
+
+                        <select
+                            id="role"
+                            name="role"
+                            required
+                        >
+                            <option value="">
+                                Select your role
+                            </option>
+
+                            <option value="student">
+                                Student
+                            </option>
+
+                            <option value="academician">
+                                Academician
+                            </option>
+
+                            <option value="industry">
+                                Industry
+                            </option>
+
+                            <option value="institution">
+                                Institution
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="register-btn">
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <p class="login-text">
+                Already have an account?
+                <a href="/login">Login</a>
+            </p>
+
+
+            <div class="back-home">
+                <a href="/">← Back to Home</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+```

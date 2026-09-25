@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Recommendations - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: #14532d;
+            color: white;
+            padding: 24px 18px;
+            overflow-y: auto;
+        }
+
+        .brand {
+            padding: 5px 12px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 18px;
+        }
+
+        .brand h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .brand p {
+            font-size: 11px;
+            color: #d1fae5;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #bbf7d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 11px 13px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255,255,255,0.13);
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 18px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 17px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .topbar h1 {
+            color: #14532d;
+            font-size: 23px;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-text span {
+            display: block;
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 32px;
+            max-width: 1200px;
+        }
+
+        .intro {
+            margin-bottom: 25px;
+        }
+
+        .intro h2 {
+            color: #124e2a;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            color: #6b7280;
+            font-size: 14px;
+            max-width: 900px;
+            line-height: 1.6;
+        }
+
+        /* ================= SUMMARY ================= */
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 13px;
+            padding: 22px;
+        }
+
+        .summary-card h3 {
+            color: #176b3a;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .summary-value {
+            color: #124e2a;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .summary-card p {
+            color: #6b7280;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* ================= PANELS ================= */
+
+        .panel {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 14px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .panel-header {
+            margin-bottom: 22px;
+        }
+
+        .panel-header h2 {
+            color: #124e2a;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .panel-header p {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        /* ================= RECOMMENDATION CARDS ================= */
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .learning-card {
+            border: 1px solid #e2e8e4;
+            border-radius: 12px;
+            padding: 20px;
+            transition: 0.2s;
+        }
+
+        .learning-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px rgba(0,0,0,0.06);
+        }
+
+        .learning-icon {
+            width: 48px;
+            height: 48px;
+            background: #eaf6ee;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            margin-bottom: 13px;
+        }
+
+        .learning-card h3 {
+            color: #176b3a;
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .learning-card p {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 13px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .tag {
+            background: #edf8f0;
+            color: #176b3a;
+            padding: 5px 8px;
+            border-radius: 14px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .gap-tag {
+            background: #fff4d9;
+            color: #8a6200;
+        }
+
+        .level-tag {
+            background: #eef2f7;
+            color: #506070;
+        }
+
+        /* ================= GAP SUMMARY ================= */
+
+        .gap-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .gap-item {
+            border: 1px solid #e2e8e4;
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .gap-item h3 {
+            color: #374151;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .gap-item p {
+            color: #6b7280;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .gap-score {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 8px;
+            background: #fdecec;
+            color: #a33b3b;
+            border-radius: 13px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* ================= LEARNING PATH ================= */
+
+        .path {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .path-step {
+            background: #f3f8f4;
+            border: 1px solid #dfe9e1;
+            border-radius: 10px;
+            padding: 13px 16px;
+            text-align: center;
+            min-width: 130px;
+        }
+
+        .path-step strong {
+            display: block;
+            color: #176b3a;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .path-step span {
+            color: #6b7280;
+            font-size: 10px;
+        }
+
+        .path-arrow {
+            color: #176b3a;
+            font-size: 20px;
+        }
+
+        /* ================= ACTIONS ================= */
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 19px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #176b3a;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #176b3a;
+            border: 1px solid #176b3a;
+        }
+
+        .note {
+            margin-top: 20px;
+            padding: 13px;
+            background: #f7faf8;
+            border: 1px solid #e4ebe6;
+            border-radius: 9px;
+            color: #6b7280;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gap-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .profile-text {
+                display: none;
+            }
+
+            .path {
+                flex-direction: column;
+            }
+
+            .path-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Student Portal</p>
+        </div>
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+        <a href="/student/dashboard" class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="/student/profile" class="nav-item">
+            👤 My Profile
+        </a>
+
+        <a href="/student/assessment" class="nav-item">
+            📝 Skill Assessment
+        </a>
+
+        <a href="/student/skill-gap" class="nav-item">
+            📊 Skill Gap Analysis
+        </a>
+
+        <a href="/student/learning" class="nav-item active">
+            🎓 Learning Programs
+        </a>
+
+        <a href="#" class="nav-item">
+            🌿 AYUSH Internships
+        </a>
+
+        <a href="#" class="nav-item">
+            💼 Placements
+        </a>
+
+        <div class="menu-title">
+            My Activity
+        </div>
+
+        <a href="#" class="nav-item">
+            📋 My Applications
+        </a>
+
+        <a href="#" class="nav-item">
+            🪪 Digital Portfolio
+        </a>
+
+        <a href="#" class="nav-item">
+            🔔 Notifications
+        </a>
+
+        <div class="logout">
+            <a href="/logout" class="nav-item">
+                🚪 Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <h1>Learning Recommendations</h1>
+
+            <div class="profile-area">
+
+                <div class="avatar">
+                    {{ name[0] | upper }}
+                </div>
+
+                <div class="profile-text">
+
+                    <strong>
+                        {{ name }}
+                    </strong>
+
+                    <span>
+                        Student
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="content">
+
+            <!-- INTRO -->
+
+            <div class="intro">
+
+                <h2>
+                    Personalized Learning Path
+                </h2>
+
+                <p>
+                    Based on your skill assessment and identified
+                    development areas, AYUSH SkillBridge recommends
+                    learning and training areas that can strengthen
+                    your academic and industry readiness.
+                </p>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <section class="summary-grid">
+
+                <div class="summary-card">
+
+                    <h3>
+                        Overall Skill Score
+                    </h3>
+
+                    <div class="summary-value">
+                        {{ overall_percentage | round(0) | int }}%
+                    </div>
+
+                    <p>
+                        Latest assessment score
+                    </p>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <h3>
+                        Development Areas
+                    </h3>
+
+                    <div class="summary-value">
+                        {{ gap_count }}
+                    </div>
+
+                    <p>
+                        Skills recommended for improvement
+                    </p>
+
+                </div>
+
+
+                <div class="summary-card">
+
+                    <h3>
+                        Learning Recommendations
+                    </h3>
+
+                    <div class="summary-value">
+                        {{ recommendations | length }}
+                    </div>
+
+                    <p>
+                        Personalized learning suggestions
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- GAP AREAS -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Your Development Areas
+                    </h2>
+
+                    <p>
+                        These areas can be strengthened through targeted learning.
+                    </p>
+
+                </div>
+
+
+                {% if gaps %}
+
+                    <div class="gap-list">
+
+                        {% for gap in gaps %}
+
+                            <div class="gap-item">
+
+                                <h3>
+                                    {{ gap["category"] }}
+                                </h3>
+
+                                <p>
+                                    Your current assessment score is
+                                    {{ gap["percentage"] | round(0) | int }}%.
+                                </p>
+
+                                <span class="gap-score">
+                                    Development Needed
+                                </span>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="gap-item">
+
+                        <h3>
+                            No major development areas
+                        </h3>
+
+                        <p>
+                            Your current assessment indicates a balanced
+                            competency profile.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+            <!-- RECOMMENDATIONS -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Recommended Learning
+                    </h2>
+
+                    <p>
+                        Suggestions generated from your current skill-gap profile.
+                    </p>
+
+                </div>
+
+
+                {% if recommendations %}
+
+                    <div class="learning-grid">
+
+                        {% for recommendation in recommendations %}
+
+                            <div class="learning-card">
+
+                                <div class="learning-icon">
+                                    📚
+                                </div>
+
+                                <h3>
+                                    {{ recommendation["title"] }}
+                                </h3>
+
+                                <p>
+                                    {{ recommendation["description"] }}
+                                </p>
+
+                                <div class="tags">
+
+                                    <span class="tag gap-tag">
+                                        {{ recommendation["tag"] }}
+                                    </span>
+
+                                    <span class="tag level-tag">
+                                        Personalized
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="learning-card">
+
+                        <div class="learning-icon">
+                            🎯
+                        </div>
+
+                        <h3>
+                            Complete Your Skill Assessment
+                        </h3>
+
+                        <p>
+                            Complete the assessment to receive
+                            personalized learning recommendations.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+
+            <!-- LEARNING PATH -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <h2>
+                        Suggested Development Journey
+                    </h2>
+
+                    <p>
+                        A simple pathway for moving from assessment to opportunity readiness.
+                    </p>
+
+                </div>
+
+
+                <div class="path">
+
+                    <div class="path-step">
+                        <strong>Assess</strong>
+                        <span>Understand current skills</span>
+                    </div>
+
+                    <div class="path-arrow">
+                        →
+                    </div>
+
+                    <div class="path-step">
+                        <strong>Identify</strong>
+                        <span>Find priority skill gaps</span>
+                    </div>
+
+                    <div class="path-arrow">
+                        →
+                    </div>
+
+                    <div class="path-step">
+                        <strong>Learn</strong>
+                        <span>Build required competencies</span>
+                    </div>
+
+                    <div class="path-arrow">
+                        →
+                    </div>
+
+                    <div class="path-step">
+                        <strong>Practice</strong>
+                        <span>Apply skills in projects</span>
+                    </div>
+
+                    <div class="path-arrow">
+                        →
+                    </div>
+
+                    <div class="path-step">
+                        <strong>Apply</strong>
+                        <span>Explore relevant opportunities</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ACTIONS -->
+
+            <section class="panel">
+
+                <div class="actions">
+
+                    <a
+                        href="/student/skill-gap"
+                        class="btn btn-secondary"
+                    >
+                        ← Back to Skill Gap
+                    </a>
+
+                    <a
+                        href="/student/assessment"
+                        class="btn btn-primary"
+                    >
+                        Retake Assessment
+                    </a>
+
+                </div>
+
+                <div class="note">
+
+                    <strong>Note:</strong>
+                    These recommendations are based on the current
+                    assessment result. In a future stage, this module
+                    can be connected to verified courses, workshops,
+                    certifications, training providers and industry
+                    learning programs.
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

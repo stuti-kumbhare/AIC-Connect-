@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FDP & Workshops - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 25px 18px;
+        }
+
+        .brand h2 {
+            color: #166534;
+            font-size: 22px;
+        }
+
+        .brand p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .menu-title {
+            margin: 30px 10px 12px;
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-item {
+            display: block;
+            text-decoration: none;
+            color: #374151;
+            padding: 12px 14px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+        }
+
+        .nav-item:hover {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .active {
+            background: #166534;
+            color: white;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 20px;
+            width: calc(100% - 36px);
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
+        }
+
+        .header h1 {
+            color: #14532d;
+            font-size: 30px;
+        }
+
+        .header p {
+            color: #6b7280;
+            margin-top: 8px;
+            margin-bottom: 30px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .card h3 {
+            color: #166534;
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .tags {
+            margin-top: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 6px;
+        }
+
+        .info {
+            background: #f0fdf4;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 18px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 18px;
+            background: #166534;
+            color: white;
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: #14532d;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Academician Portal</p>
+        </div>
+
+        <div class="menu-title">Main Menu</div>
+
+        <a href="{{ url_for('academician_dashboard') }}" class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="{{ url_for('academician_faculty_opportunities') }}" class="nav-item">
+            👨‍🏫 Faculty Opportunities
+        </a>
+
+        <a href="{{ url_for('academician_industrial_training') }}" class="nav-item">
+            🏭 Industrial Training
+        </a>
+
+        <a href="{{ url_for('academician_research_projects') }}" class="nav-item">
+            🔬 Research Projects
+        </a>
+
+        <a href="{{ url_for('academician_fdp_workshops') }}" class="nav-item active">
+            🎓 FDP & Workshops
+        </a>
+
+        <a href="{{ url_for('academician_consultancy') }}" class="nav-item">
+            💼 Consultancy
+        </a>
+
+        <a href="{{ url_for('academician_collaboration') }}" class="nav-item">
+            🤝 Collaboration
+        </a>
+
+        <div class="logout">
+            <a href="{{ url_for('logout') }}" class="nav-item">
+                🚪 Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+            <h1>FDP & Workshops</h1>
+            <p>
+                Faculty development programmes, workshops and professional
+                learning opportunities for academicians.
+            </p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card">
+                <h3>AYUSH Faculty Development Programme</h3>
+
+                <p>
+                    Professional development programme focused on AYUSH
+                    education, curriculum enhancement and modern teaching
+                    practices.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">FDP</span>
+                    <span class="tag">AYUSH</span>
+                    <span class="tag">Education</span>
+                </div>
+
+                <div class="info">
+                    <b>Mode:</b> Online / Hybrid<br>
+                    <b>Duration:</b> 5 Days<br>
+                    <b>Eligibility:</b> Faculty Members
+                </div>
+
+                <a href="#" class="btn">View Programme</a>
+            </div>
+
+
+            <div class="card">
+                <h3>Digital Healthcare Workshop</h3>
+
+                <p>
+                    Workshop covering digital health technologies, healthcare
+                    platforms and technology-enabled AYUSH services.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Digital Health</span>
+                    <span class="tag">Workshop</span>
+                </div>
+
+                <div class="info">
+                    <b>Mode:</b> Online<br>
+                    <b>Duration:</b> 2 Days<br>
+                    <b>Eligibility:</b> Faculty & Researchers
+                </div>
+
+                <a href="#" class="btn">View Workshop</a>
+            </div>
+
+
+            <div class="card">
+                <h3>AI & Data Analytics in Healthcare</h3>
+
+                <p>
+                    Faculty workshop focused on Artificial Intelligence,
+                    data analytics and their applications in healthcare
+                    research.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">AI</span>
+                    <span class="tag">Data Analytics</span>
+                    <span class="tag">Healthcare</span>
+                </div>
+
+                <div class="info">
+                    <b>Mode:</b> Hybrid<br>
+                    <b>Duration:</b> 3 Days<br>
+                    <b>Eligibility:</b> Academicians
+                </div>
+
+                <a href="#" class="btn">View Workshop</a>
+            </div>
+
+
+            <div class="card">
+                <h3>Research Methodology Workshop</h3>
+
+                <p>
+                    Practical workshop covering research methods,
+                    documentation, publication practices and project
+                    development.
+                </p>
+
+                <div class="tags">
+                    <span class="tag">Research</span>
+                    <span class="tag">Methodology</span>
+                </div>
+
+                <div class="info">
+                    <b>Mode:</b> Offline / Hybrid<br>
+                    <b>Duration:</b> 3 Days<br>
+                    <b>Eligibility:</b> Faculty & Researchers
+                </div>
+
+                <a href="#" class="btn">View Workshop</a>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

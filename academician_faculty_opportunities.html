@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Faculty Opportunities - AYUSH SkillBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8f6;
+            color: #1f2937;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 25px 18px;
+            overflow-y: auto;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #16834a;
+            margin-bottom: 35px;
+        }
+
+        .nav a {
+            display: block;
+            text-decoration: none;
+            color: #4b5563;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 7px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #e9f7ef;
+            color: #16834a;
+            font-weight: 600;
+        }
+
+        .logout {
+            margin-top: 25px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 18px;
+        }
+
+        .logout a {
+            color: #dc2626;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            padding: 35px;
+            min-height: 100vh;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            color: #111827;
+        }
+
+        .header p {
+            margin-top: 7px;
+            color: #6b7280;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: linear-gradient(135deg, #16834a, #24a764);
+            color: white;
+            padding: 28px;
+            border-radius: 18px;
+            margin: 28px 0;
+        }
+
+        .hero h2 {
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+
+        .hero p {
+            line-height: 1.6;
+            max-width: 820px;
+        }
+
+        /* ================= FILTERS ================= */
+
+        .filter-box {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .filter-box h2 {
+            color: #124e2a;
+            font-size: 19px;
+            margin-bottom: 15px;
+        }
+
+        .filters {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .filters input,
+        .filters select {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .filters input:focus,
+        .filters select:focus {
+            border-color: #16834a;
+        }
+
+        /* ================= OPPORTUNITIES ================= */
+
+        .section-title {
+            color: #124e2a;
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .opportunity-card {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 15px;
+            padding: 22px;
+            transition: 0.2s;
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-3px);
+            border-color: #16834a;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e9f7ef;
+            color: #16834a;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .opportunity-card h3 {
+            color: #124e2a;
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+        .organization {
+            color: #16834a;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .detail {
+            background: #f8faf8;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .detail span {
+            display: block;
+            color: #8a938d;
+            font-size: 9px;
+            margin-bottom: 3px;
+        }
+
+        .detail strong {
+            color: #374151;
+            font-size: 11px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: #16834a;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .view-btn:hover {
+            background: #116b3c;
+        }
+
+        /* ================= INFO ================= */
+
+        .info-section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 23px;
+            margin-top: 25px;
+        }
+
+        .info-section h2 {
+            color: #124e2a;
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .info-section p {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer-note {
+            text-align: center;
+            color: #8a938d;
+            font-size: 11px;
+            padding: 30px 0 10px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .opportunity-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        AYUSH SkillBridge
+    </div>
+
+
+    <div class="nav">
+
+        <a href="{{ url_for('academician_dashboard') }}">
+            🏠 Dashboard
+        </a>
+
+        <a href="{{ url_for('academician_faculty_opportunities') }}"
+           class="active">
+            🎓 Faculty Opportunities
+        </a>
+
+        <a href="{{ url_for('academician_industrial_training') }}">
+            🏢 Industrial Training
+        </a>
+
+        <a href="{{ url_for('academician_research_projects') }}">
+            🔬 Research & Projects
+        </a>
+
+        <a href="{{ url_for('academician_fdp_workshops') }}">
+            📚 FDP & Workshops
+        </a>
+
+        <a href="{{ url_for('academician_consultancy') }}">
+            💼 Consultancy
+        </a>
+
+        <a href="{{ url_for('academician_collaboration') }}">
+            🤝 Collaboration
+        </a>
+
+
+        <div class="logout">
+
+            <a href="{{ url_for('logout') }}">
+                🚪 Logout
+            </a>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+    <div class="header">
+
+        <h1>
+            Faculty Opportunities
+        </h1>
+
+        <p>
+            Welcome, {{ name }}
+        </p>
+
+    </div>
+
+
+    <!-- ================= HERO ================= -->
+
+    <div class="hero">
+
+        <h2>
+            Faculty & Academic Opportunities 🎓
+        </h2>
+
+        <p>
+            Explore faculty internships, academic-industry programs,
+            professional development opportunities and practical
+            exposure programs through AYUSH SkillBridge.
+        </p>
+
+    </div>
+
+
+    <!-- ================= FILTERS ================= -->
+
+    <div class="filter-box">
+
+        <h2>
+            Find Relevant Opportunities
+        </h2>
+
+        <div class="filters">
+
+            <input
+                type="text"
+                placeholder="Search opportunity..."
+            >
+
+            <select>
+
+                <option value="">
+                    Select Domain
+                </option>
+
+                <option>
+                    AYUSH Research
+                </option>
+
+                <option>
+                    Digital Health
+                </option>
+
+                <option>
+                    Healthcare
+                </option>
+
+                <option>
+                    Pharmaceutical Research
+                </option>
+
+            </select>
+
+
+            <select>
+
+                <option value="">
+                    Select Mode
+                </option>
+
+                <option>
+                    On-site
+                </option>
+
+                <option>
+                    Hybrid
+                </option>
+
+                <option>
+                    Online
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= OPPORTUNITY LIST ================= -->
+
+    <h2 class="section-title">
+        Available Faculty Opportunities
+    </h2>
+
+
+    <div class="opportunity-grid">
+
+
+        <!-- OPPORTUNITY 1 -->
+
+        <div class="opportunity-card">
+
+            <span class="tag">
+                Faculty Internship
+            </span>
+
+            <h3>
+                AYUSH Research Faculty Program
+            </h3>
+
+            <div class="organization">
+                AYUSH Research & Innovation Centre
+            </div>
+
+            <p class="description">
+                Faculty members can participate in research,
+                documentation and evidence-based AYUSH projects
+                in collaboration with research professionals.
+            </p>
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <span>
+                        Duration
+                    </span>
+
+                    <strong>
+                        8 Weeks
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Mode
+                    </span>
+
+                    <strong>
+                        Hybrid
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Domain
+                    </span>
+
+                    <strong>
+                        AYUSH Research
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Location
+                    </span>
+
+                    <strong>
+                        Bhopal
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <a href="#" class="view-btn">
+                View Opportunity →
+            </a>
+
+        </div>
+
+
+        <!-- OPPORTUNITY 2 -->
+
+        <div class="opportunity-card">
+
+            <span class="tag">
+                Industry Training
+            </span>
+
+            <h3>
+                Healthcare Technology Faculty Training
+            </h3>
+
+            <div class="organization">
+                Digital Healthcare Innovation Lab
+            </div>
+
+            <p class="description">
+                Practical exposure program focused on healthcare
+                technology, digital systems and emerging tools
+                used in modern healthcare environments.
+            </p>
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <span>
+                        Duration
+                    </span>
+
+                    <strong>
+                        4 Weeks
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Mode
+                    </span>
+
+                    <strong>
+                        Online
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Domain
+                    </span>
+
+                    <strong>
+                        Digital Health
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Location
+                    </span>
+
+                    <strong>
+                        Online
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <a href="#" class="view-btn">
+                View Opportunity →
+            </a>
+
+        </div>
+
+
+        <!-- OPPORTUNITY 3 -->
+
+        <div class="opportunity-card">
+
+            <span class="tag">
+                Research Program
+            </span>
+
+            <h3>
+                Herbal Medicine Research Collaboration
+            </h3>
+
+            <div class="organization">
+                Centre for Herbal Research
+            </div>
+
+            <p class="description">
+                Collaborative research opportunity for faculty
+                interested in herbal medicine, documentation and
+                applied research activities.
+            </p>
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <span>
+                        Duration
+                    </span>
+
+                    <strong>
+                        12 Weeks
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Mode
+                    </span>
+
+                    <strong>
+                        On-site
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Domain
+                    </span>
+
+                    <strong>
+                        Herbal Research
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Location
+                    </span>
+
+                    <strong>
+                        Nagpur
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <a href="#" class="view-btn">
+                View Opportunity →
+            </a>
+
+        </div>
+
+
+        <!-- OPPORTUNITY 4 -->
+
+        <div class="opportunity-card">
+
+            <span class="tag">
+                Faculty Development
+            </span>
+
+            <h3>
+                AYUSH Digital Learning Program
+            </h3>
+
+            <div class="organization">
+                Healthcare Learning Network
+            </div>
+
+            <p class="description">
+                Professional development program covering
+                digital learning tools, healthcare data and
+                technology-enabled education.
+            </p>
+
+            <div class="details">
+
+                <div class="detail">
+
+                    <span>
+                        Duration
+                    </span>
+
+                    <strong>
+                        6 Weeks
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Mode
+                    </span>
+
+                    <strong>
+                        Hybrid
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Domain
+                    </span>
+
+                    <strong>
+                        Digital Health
+                    </strong>
+
+                </div>
+
+                <div class="detail">
+
+                    <span>
+                        Location
+                    </span>
+
+                    <strong>
+                        Bhopal
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <a href="#" class="view-btn">
+                View Opportunity →
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= INFO ================= -->
+
+    <div class="info-section">
+
+        <h2>
+            About Faculty Opportunities
+        </h2>
+
+        <p>
+            These opportunities are designed to support faculty
+            members in gaining practical industry exposure,
+            strengthening research capabilities, participating
+            in professional development programs and building
+            long-term academia–industry collaborations.
+        </p>
+
+    </div>
+
+
+    <div class="footer-note">
+
+        AYUSH SkillBridge • SIH26044 • Proposed Solution for Ministry of Ayush Problem Statement
+
+    </div>
+
+
+</main>
+
+
+</body>
+
+</html>

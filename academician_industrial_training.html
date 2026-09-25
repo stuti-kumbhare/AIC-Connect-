@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Training - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8f6;
+            color: #1f2937;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 25px 18px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #16834a;
+            margin-bottom: 35px;
+        }
+
+        .nav a {
+            display: block;
+            text-decoration: none;
+            color: #4b5563;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #e9f7ef;
+            color: #16834a;
+            font-weight: 600;
+        }
+
+        .logout {
+            margin-top: 25px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 18px;
+        }
+
+        .logout a {
+            color: #dc2626;
+        }
+
+        .main {
+            flex: 1;
+            padding: 35px;
+        }
+
+        .header h1 {
+            font-size: 30px;
+            color: #111827;
+        }
+
+        .header p {
+            color: #6b7280;
+            margin-top: 7px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #16834a, #24a764);
+            color: white;
+            padding: 28px;
+            border-radius: 18px;
+            margin: 28px 0;
+        }
+
+        .hero h2 {
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+
+        .hero p {
+            line-height: 1.6;
+            max-width: 850px;
+        }
+
+        .section-title {
+            color: #124e2a;
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .training-card {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 15px;
+            padding: 22px;
+            transition: 0.2s;
+        }
+
+        .training-card:hover {
+            transform: translateY(-3px);
+            border-color: #16834a;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #e9f7ef;
+            color: #16834a;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .training-card h3 {
+            color: #124e2a;
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+        .organization {
+            color: #16834a;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .detail {
+            background: #f8faf8;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .detail span {
+            display: block;
+            color: #8a938d;
+            font-size: 9px;
+            margin-bottom: 3px;
+        }
+
+        .detail strong {
+            color: #374151;
+            font-size: 11px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background: #16834a;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .view-btn:hover {
+            background: #116b3c;
+        }
+
+        .info-section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 23px;
+            margin-top: 25px;
+        }
+
+        .info-section h2 {
+            color: #124e2a;
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .info-section p {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #8a938d;
+            font-size: 11px;
+            padding: 30px 0 10px;
+        }
+
+        @media (max-width: 950px) {
+            .training-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                display: block;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            AYUSH SkillBridge
+        </div>
+
+        <div class="nav">
+
+            <a href="{{ url_for('academician_dashboard') }}">
+                🏠 Dashboard
+            </a>
+
+            <a href="{{ url_for('academician_faculty_opportunities') }}">
+                🎓 Faculty Opportunities
+            </a>
+
+            <a href="{{ url_for('academician_industrial_training') }}"
+               class="active">
+                🏢 Industrial Training
+            </a>
+
+            <a href="{{ url_for('academician_research_projects') }}">
+                🔬 Research & Projects
+            </a>
+
+            <a href="{{ url_for('academician_fdp_workshops') }}">
+                📚 FDP & Workshops
+            </a>
+
+            <a href="{{ url_for('academician_consultancy') }}">
+                💼 Consultancy
+            </a>
+
+            <a href="{{ url_for('academician_collaboration') }}">
+                🤝 Collaboration
+            </a>
+
+            <div class="logout">
+                <a href="{{ url_for('logout') }}">
+                    🚪 Logout
+                </a>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="header">
+
+            <h1>
+                Industrial Training
+            </h1>
+
+            <p>
+                Welcome, {{ name }}
+            </p>
+
+        </div>
+
+
+        <div class="hero">
+
+            <h2>
+                Industrial Training Programs 🏢
+            </h2>
+
+            <p>
+                Explore practical training programs that help
+                academicians gain industry exposure, understand
+                emerging technologies and strengthen academic–
+                industry connections.
+            </p>
+
+        </div>
+
+
+        <h2 class="section-title">
+            Available Training Programs
+        </h2>
+
+
+        <div class="training-grid">
+
+
+            <div class="training-card">
+
+                <span class="tag">
+                    Digital Health
+                </span>
+
+                <h3>
+                    Digital Healthcare Systems Training
+                </h3>
+
+                <div class="organization">
+                    Healthcare Technology Innovation Centre
+                </div>
+
+                <p class="description">
+                    Practical exposure to digital healthcare platforms,
+                    health data systems, electronic records and
+                    technology-enabled healthcare services.
+                </p>
+
+                <div class="details">
+
+                    <div class="detail">
+                        <span>Duration</span>
+                        <strong>4 Weeks</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Mode</span>
+                        <strong>Hybrid</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Domain</span>
+                        <strong>Digital Health</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Location</span>
+                        <strong>Bhopal</strong>
+                    </div>
+
+                </div>
+
+                <a href="#" class="view-btn">
+                    View Training →
+                </a>
+
+            </div>
+
+
+            <div class="training-card">
+
+                <span class="tag">
+                    Healthcare Technology
+                </span>
+
+                <h3>
+                    Healthcare Innovation Training
+                </h3>
+
+                <div class="organization">
+                    Health Innovation and Research Lab
+                </div>
+
+                <p class="description">
+                    Gain practical knowledge of healthcare innovation,
+                    technology development, project implementation
+                    and industry workflows.
+                </p>
+
+                <div class="details">
+
+                    <div class="detail">
+                        <span>Duration</span>
+                        <strong>6 Weeks</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Mode</span>
+                        <strong>On-site</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Domain</span>
+                        <strong>Healthcare</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Location</span>
+                        <strong>Nagpur</strong>
+                    </div>
+
+                </div>
+
+                <a href="#" class="view-btn">
+                    View Training →
+                </a>
+
+            </div>
+
+
+            <div class="training-card">
+
+                <span class="tag">
+                    AYUSH
+                </span>
+
+                <h3>
+                    AYUSH Industry Exposure Program
+                </h3>
+
+                <div class="organization">
+                    AYUSH Innovation Centre
+                </div>
+
+                <p class="description">
+                    Understand industry practices related to AYUSH
+                    products, research, documentation, quality and
+                    innovation.
+                </p>
+
+                <div class="details">
+
+                    <div class="detail">
+                        <span>Duration</span>
+                        <strong>8 Weeks</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Mode</span>
+                        <strong>Hybrid</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Domain</span>
+                        <strong>AYUSH</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Location</span>
+                        <strong>Bhopal</strong>
+                    </div>
+
+                </div>
+
+                <a href="#" class="view-btn">
+                    View Training →
+                </a>
+
+            </div>
+
+
+            <div class="training-card">
+
+                <span class="tag">
+                    Research
+                </span>
+
+                <h3>
+                    Research & Data Analytics Training
+                </h3>
+
+                <div class="organization">
+                    Centre for Healthcare Research
+                </div>
+
+                <p class="description">
+                    Improve practical understanding of research methods,
+                    data interpretation, analytics and evidence-based
+                    healthcare research.
+                </p>
+
+                <div class="details">
+
+                    <div class="detail">
+                        <span>Duration</span>
+                        <strong>5 Weeks</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Mode</span>
+                        <strong>Online</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Domain</span>
+                        <strong>Research</strong>
+                    </div>
+
+                    <div class="detail">
+                        <span>Location</span>
+                        <strong>Online</strong>
+                    </div>
+
+                </div>
+
+                <a href="#" class="view-btn">
+                    View Training →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="info-section">
+
+            <h2>
+                About Industrial Training
+            </h2>
+
+            <p>
+                Industrial training enables academicians to gain
+                practical exposure to industry processes, technologies,
+                research practices and professional environments.
+                These programs support continuous professional
+                development and strengthen academia–industry
+                collaboration.
+            </p>
+
+        </div>
+
+
+        <div class="footer-note">
+            AYUSH SkillBridge • SIH26044 • Proposed Solution for Ministry of Ayush Problem Statement
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

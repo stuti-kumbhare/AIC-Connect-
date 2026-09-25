@@ -1,0 +1,62 @@
+<!-- COMMON STUDENT SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <h2>AYUSH SkillBridge</h2>
+        <p>Student Portal</p>
+    </div>
+
+    <div class="menu-title">Main Menu</div>
+
+    <a href="{{ url_for('student_dashboard') }}" class="nav-item">
+        🏠 Dashboard
+    </a>
+
+    <a href="{{ url_for('student_profile') }}" class="nav-item">
+        👤 My Profile
+    </a>
+
+    <a href="{{ url_for('student_assessment') }}" class="nav-item">
+        📝 Skill Assessment
+    </a>
+
+    <a href="{{ url_for('student_skill_gap') }}" class="nav-item">
+        📊 Skill Gap Analysis
+    </a>
+
+    <a href="{{ url_for('student_learning') }}" class="nav-item">
+        🎓 Learning Programs
+    </a>
+
+    <a href="{{ url_for('student_opportunities') }}" class="nav-item">
+        🌿 AYUSH Internships
+    </a>
+
+    <a href="{{ url_for('student_placements') }}" class="nav-item">
+        💼 Placements
+    </a>
+
+    <div class="menu-title">My Activity</div>
+
+    <a href="{{ url_for('student_applications') }}" class="nav-item">
+        📋 My Applications
+    </a>
+
+    <a href="{{ url_for('student_portfolio') }}" class="nav-item">
+        🪪 Digital Portfolio
+    </a>
+
+    <a href="{{ url_for('notifications') }}" class="nav-item">
+        🔔 Notifications
+    </a>
+
+    <div class="logout">
+
+        <a href="{{ url_for('logout') }}" class="nav-item">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</aside>

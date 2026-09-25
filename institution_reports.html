@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Institution Reports - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f6;
+            color: #1f2937;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #0f5132;
+            color: white;
+            padding: 25px 18px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo h2 {
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            font-size: 12px;
+            color: #d7f5e5;
+        }
+
+        .menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 13px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background: #198754;
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 25px;
+            left: 18px;
+            right: 18px;
+            background: #dc3545 !important;
+            text-align: center;
+        }
+
+        .logout:hover {
+            background: #bb2d3b !important;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 22px 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .header h1 {
+            color: #0f5132;
+            font-size: 28px;
+            margin-bottom: 7px;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .report-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .report-card h3 {
+            color: #0f5132;
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .report-card p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .report-data {
+            margin-bottom: 20px;
+        }
+
+        .report-data div {
+            padding: 9px 0;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        .report-data strong {
+            color: #374151;
+        }
+
+        .value {
+            float: right;
+            color: #0f5132;
+            font-weight: bold;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #198754;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #146c43;
+        }
+
+        .info-box {
+            background: white;
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .info-box h2 {
+            color: #0f5132;
+            margin-bottom: 12px;
+        }
+
+        .info-box p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 850px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+                padding: 20px;
+            }
+
+            .report-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Institution Portal</p>
+        </div>
+
+        <div class="menu">
+
+            <a href="{{ url_for('institution_dashboard') }}">
+                🏠 Dashboard
+            </a>
+
+            <a href="{{ url_for('institution_students') }}">
+                👨‍🎓 Students
+            </a>
+
+            <a href="{{ url_for('institution_academicians') }}">
+                👩‍🏫 Academicians
+            </a>
+
+            <a href="{{ url_for('institution_opportunities') }}">
+                💼 Opportunities
+            </a>
+
+            <a href="{{ url_for('institution_skill_analytics') }}">
+                📊 Skill Analytics
+            </a>
+
+            <a href="{{ url_for('institution_placement_analytics') }}">
+                📈 Placement Analytics
+            </a>
+
+            <a href="{{ url_for('institution_reports') }}" class="active">
+                📄 Reports
+            </a>
+
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="menu logout">
+            🚪 Logout
+        </a>
+
+    </aside>
+
+
+    <!-- Main -->
+    <main class="main">
+
+        <div class="header">
+
+            <h1>Institution Reports</h1>
+
+            <p>
+                View important institutional statistics related to
+                students, academicians, skills, opportunities and placements.
+            </p>
+
+        </div>
+
+
+        <div class="report-grid">
+
+            <!-- Student Report -->
+            <div class="report-card">
+
+                <h3>👨‍🎓 Student Report</h3>
+
+                <p>
+                    Overview of registered students and their participation
+                    in the AYUSH SkillBridge platform.
+                </p>
+
+                <div class="report-data">
+
+                    <div>
+                        <strong>Total Students</strong>
+                        <span class="value">
+                            {{ student_count }}
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>Assessed Students</strong>
+                        <span class="value">
+                            {{ assessed_students }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <a href="{{ url_for('institution_students') }}" class="btn">
+                    View Students
+                </a>
+
+            </div>
+
+
+            <!-- Academician Report -->
+            <div class="report-card">
+
+                <h3>👩‍🏫 Academician Report</h3>
+
+                <p>
+                    Overview of academicians registered on the
+                    AYUSH SkillBridge platform.
+                </p>
+
+                <div class="report-data">
+
+                    <div>
+                        <strong>Total Academicians</strong>
+                        <span class="value">
+                            {{ academician_count }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <a href="{{ url_for('institution_academicians') }}" class="btn">
+                    View Academicians
+                </a>
+
+            </div>
+
+
+            <!-- Opportunity Report -->
+            <div class="report-card">
+
+                <h3>💼 Opportunity Report</h3>
+
+                <p>
+                    Summary of industry opportunities available for
+                    students through the platform.
+                </p>
+
+                <div class="report-data">
+
+                    <div>
+                        <strong>Open Opportunities</strong>
+                        <span class="value">
+                            {{ opportunity_count }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <a href="{{ url_for('institution_opportunities') }}" class="btn">
+                    View Opportunities
+                </a>
+
+            </div>
+
+
+            <!-- Skill Report -->
+            <div class="report-card">
+
+                <h3>📊 Skill Development Report</h3>
+
+                <p>
+                    Summary of student assessment and institution-level
+                    skill development areas.
+                </p>
+
+                <div class="report-data">
+
+                    <div>
+                        <strong>Strong Skill Areas</strong>
+                        <span class="value">
+                            {{ strong_skills }}
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>Skill Gap Areas</strong>
+                        <span class="value">
+                            {{ gap_skills }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <a href="{{ url_for('institution_skill_analytics') }}" class="btn">
+                    View Skill Analytics
+                </a>
+
+            </div>
+
+
+            <!-- Placement Report -->
+            <div class="report-card">
+
+                <h3>📈 Placement Report</h3>
+
+                <p>
+                    Summary of student placement and job applications
+                    received through the platform.
+                </p>
+
+                <div class="report-data">
+
+                    <div>
+                        <strong>Total Applications</strong>
+                        <span class="value">
+                            {{ total_applications }}
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>Approved</strong>
+                        <span class="value">
+                            {{ approved_applications }}
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>Pending</strong>
+                        <span class="value">
+                            {{ pending_applications }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <a href="{{ url_for('institution_placement_analytics') }}" class="btn">
+                    View Placement Analytics
+                </a>
+
+            </div>
+
+
+            <!-- Application Report -->
+            <div class="report-card">
+
+                <h3>📝 Application Report</h3>
+
+                <p>
+                    Overall application activity across internship,
+                    project, placement and job opportunities.
+                </p>
+
+                <div class="report-data">
+
+                    <div>
+                        <strong>Total Applications</strong>
+                        <span class="value">
+                            {{ application_count }}
+                        </span>
+                    </div>
+
+                </div>
+
+                <a href="{{ url_for('institution_placement_analytics') }}" class="btn">
+                    View Applications
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Information -->
+        <div class="info-box">
+
+            <h2>About Institutional Reports</h2>
+
+            <p>
+                These reports provide institutions with a consolidated
+                view of student development, academician participation,
+                industry opportunities and placement activities. The
+                information can support better planning, training,
+                skill development and Academia-Industry collaboration.
+            </p>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

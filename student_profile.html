@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile - AYUSH SkillBridge</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: #14532d;
+            color: white;
+            padding: 24px 18px;
+            overflow-y: auto;
+        }
+
+        .brand {
+            padding: 5px 12px 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 18px;
+        }
+
+        .brand h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .brand p {
+            font-size: 11px;
+            color: #d1fae5;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #bbf7d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 11px 13px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.13);
+        }
+
+        .nav-item.active {
+            background: rgba(255,255,255,0.18);
+            font-weight: 600;
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 18px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 17px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar h1 {
+            color: #14532d;
+            font-size: 23px;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-text span {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .content {
+            padding: 32px;
+        }
+
+        /* ================= INTRO ================= */
+
+        .page-intro {
+            margin-bottom: 25px;
+        }
+
+        .page-intro h2 {
+            color: #124e2a;
+            font-size: 28px;
+            margin-bottom: 7px;
+        }
+
+        .page-intro p {
+            color: #6b7280;
+            font-size: 14px;
+            max-width: 850px;
+        }
+
+        /* ================= PROFILE LAYOUT ================= */
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 22px;
+            margin-bottom: 22px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 14px;
+            padding: 25px;
+        }
+
+        .panel h3 {
+            color: #124e2a;
+            margin-bottom: 20px;
+            font-size: 19px;
+        }
+
+        /* ================= PROFILE SUMMARY ================= */
+
+        .profile-summary {
+            text-align: center;
+        }
+
+        .big-avatar {
+            width: 95px;
+            height: 95px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .profile-summary h2 {
+            color: #124e2a;
+            margin-bottom: 5px;
+            word-break: break-word;
+        }
+
+        .profile-summary p {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .profile-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: #e5f4e9;
+            color: #176b3a;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .info-list {
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .info-row {
+            padding: 12px 0;
+            border-bottom: 1px solid #edf0ee;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            display: block;
+            color: #6b7280;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 13px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .empty-value {
+            color: #9ca3af;
+            font-weight: normal;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 3px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            color: #374151;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 12px 13px;
+            font-size: 13px;
+            outline: none;
+            background: white;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #176b3a;
+        }
+
+        textarea {
+            min-height: 105px;
+            resize: vertical;
+        }
+
+        .save-btn {
+            margin-top: 22px;
+            width: 100%;
+            border: none;
+            background: #176b3a;
+            color: white;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #12552e;
+        }
+
+        /* ================= SKILLS ================= */
+
+        .skills-section {
+            margin-top: 22px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: #edf8f0;
+            color: #176b3a;
+            border: 1px solid #d7eadc;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .note {
+            margin-top: 15px;
+            padding: 13px;
+            background: #f7faf8;
+            border-radius: 8px;
+            color: #6b7280;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .profile-text {
+                display: none;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- ================= COMMON SIDEBAR ================= -->
+
+    {% include '_sidebar.html' %}
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <h1>My Profile</h1>
+
+            <div class="profile-area">
+
+                <div class="avatar">
+                    {{ name[0] | upper }}
+                </div>
+
+                <div class="profile-text">
+
+                    <strong>
+                        {{ name }}
+                    </strong>
+
+                    <span>
+                        Student
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+
+            <!-- ================= INTRO ================= -->
+
+            <div class="page-intro">
+
+                <h2>
+                    Student Profile
+                </h2>
+
+                <p>
+                    Complete your profile to improve skill mapping,
+                    learning recommendations, internship and
+                    placement matching.
+                </p>
+
+            </div>
+
+
+            <!-- ================= PROFILE ================= -->
+
+            <section class="profile-grid">
+
+
+                <!-- PROFILE SUMMARY -->
+
+                <div class="panel">
+
+                    <div class="profile-summary">
+
+                        <div class="big-avatar">
+                            {{ name[0] | upper }}
+                        </div>
+
+                        <h2>
+                            {{
+                                profile['full_name']
+                                if profile and profile['full_name']
+                                else name
+                            }}
+                        </h2>
+
+                        <p>
+                            Student • AYUSH SkillBridge
+                        </p>
+
+
+                        {% if profile %}
+
+                            <span class="profile-status">
+                                Profile Completed
+                            </span>
+
+                        {% else %}
+
+                            <span class="profile-status">
+                                Profile In Progress
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="info-list">
+
+
+                        <!-- EMAIL -->
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Email
+                            </span>
+
+                            {% if profile and profile['email'] %}
+
+                                <span class="info-value">
+                                    {{ profile['email'] }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="info-value empty-value">
+                                    Not added yet
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- INSTITUTION -->
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Institution
+                            </span>
+
+                            {% if profile and profile['institution'] %}
+
+                                <span class="info-value">
+                                    {{ profile['institution'] }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="info-value empty-value">
+                                    Not added yet
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- COURSE -->
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Course
+                            </span>
+
+                            {% if profile and profile['course'] %}
+
+                                <span class="info-value">
+                                    {{ profile['course'] }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="info-value empty-value">
+                                    Not added yet
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <!-- CAREER INTEREST -->
+
+                        <div class="info-row">
+
+                            <span class="info-label">
+                                Career Interest
+                            </span>
+
+                            {% if profile and profile['career_interest'] %}
+
+                                <span class="info-value">
+                                    {{ profile['career_interest'].replace('_', ' ').title() }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="info-value empty-value">
+                                    Not selected
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= FORM ================= -->
+
+                <div class="panel">
+
+                    <h3>
+                        Academic & Career Information
+                    </h3>
+
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('student_profile') }}"
+                    >
+
+
+                        <div class="form-grid">
+
+
+                            <!-- FULL NAME -->
+
+                            <div class="form-group">
+
+                                <label for="full_name">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="full_name"
+                                    name="full_name"
+                                    value="{{ profile['full_name'] if profile and profile['full_name'] else name }}"
+                                    placeholder="Enter your full name"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- EMAIL -->
+
+                            <div class="form-group">
+
+                                <label for="email">
+                                    Email Address
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value="{{ profile['email'] if profile and profile['email'] else '' }}"
+                                    placeholder="Enter your email"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- INSTITUTION -->
+
+                            <div class="form-group">
+
+                                <label for="institution">
+                                    Institution
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="institution"
+                                    name="institution"
+                                    value="{{ profile['institution'] if profile and profile['institution'] else '' }}"
+                                    placeholder="Enter your college or institution"
+                                >
+
+                            </div>
+
+
+                            <!-- COURSE -->
+
+                            <div class="form-group">
+
+                                <label for="course">
+                                    Course
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="course"
+                                    name="course"
+                                    value="{{ profile['course'] if profile and profile['course'] else '' }}"
+                                    placeholder="Example: BAMS, B.Sc., B.Tech."
+                                >
+
+                            </div>
+
+
+                            <!-- DEPARTMENT -->
+
+                            <div class="form-group">
+
+                                <label for="department">
+                                    Department / Branch
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="department"
+                                    name="department"
+                                    value="{{ profile['department'] if profile and profile['department'] else '' }}"
+                                    placeholder="Enter department or branch"
+                                >
+
+                            </div>
+
+
+                            <!-- GRADUATION YEAR -->
+
+                            <div class="form-group">
+
+                                <label for="graduation_year">
+                                    Graduation Year
+                                </label>
+
+                                <select
+                                    id="graduation_year"
+                                    name="graduation_year"
+                                >
+
+                                    <option value="">
+                                        Select year
+                                    </option>
+
+                                    <option
+                                        value="2026"
+                                        {% if profile and profile['graduation_year'] == '2026' %}selected{% endif %}
+                                    >
+                                        2026
+                                    </option>
+
+                                    <option
+                                        value="2027"
+                                        {% if profile and profile['graduation_year'] == '2027' %}selected{% endif %}
+                                    >
+                                        2027
+                                    </option>
+
+                                    <option
+                                        value="2028"
+                                        {% if profile and profile['graduation_year'] == '2028' %}selected{% endif %}
+                                    >
+                                        2028
+                                    </option>
+
+                                    <option
+                                        value="2029"
+                                        {% if profile and profile['graduation_year'] == '2029' %}selected{% endif %}
+                                    >
+                                        2029
+                                    </option>
+
+                                    <option
+                                        value="2030"
+                                        {% if profile and profile['graduation_year'] == '2030' %}selected{% endif %}
+                                    >
+                                        2030
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- CAREER INTEREST -->
+
+                            <div class="form-group">
+
+                                <label for="career_interest">
+                                    Career Interest
+                                </label>
+
+                                <select
+                                    id="career_interest"
+                                    name="career_interest"
+                                >
+
+                                    <option value="">
+                                        Select career interest
+                                    </option>
+
+                                    <option
+                                        value="ayush_research"
+                                        {% if profile and profile['career_interest'] == 'ayush_research' %}selected{% endif %}
+                                    >
+                                        AYUSH Research
+                                    </option>
+
+                                    <option
+                                        value="clinical_research"
+                                        {% if profile and profile['career_interest'] == 'clinical_research' %}selected{% endif %}
+                                    >
+                                        Clinical Research
+                                    </option>
+
+                                    <option
+                                        value="digital_health"
+                                        {% if profile and profile['career_interest'] == 'digital_health' %}selected{% endif %}
+                                    >
+                                        Digital Health
+                                    </option>
+
+                                    <option
+                                        value="healthcare_innovation"
+                                        {% if profile and profile['career_interest'] == 'healthcare_innovation' %}selected{% endif %}
+                                    >
+                                        Healthcare Innovation
+                                    </option>
+
+                                    <option
+                                        value="pharmaceutical_research"
+                                        {% if profile and profile['career_interest'] == 'pharmaceutical_research' %}selected{% endif %}
+                                    >
+                                        Pharmaceutical Research
+                                    </option>
+
+                                    <option
+                                        value="public_health"
+                                        {% if profile and profile['career_interest'] == 'public_health' %}selected{% endif %}
+                                    >
+                                        Public Health
+                                    </option>
+
+                                    <option
+                                        value="other"
+                                        {% if profile and profile['career_interest'] == 'other' %}selected{% endif %}
+                                    >
+                                        Other
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- OPPORTUNITY -->
+
+                            <div class="form-group">
+
+                                <label for="opportunity_type">
+                                    Preferred Opportunity
+                                </label>
+
+                                <select
+                                    id="opportunity_type"
+                                    name="opportunity_type"
+                                >
+
+                                    <option value="">
+                                        Select opportunity type
+                                    </option>
+
+                                    <option
+                                        value="internship"
+                                        {% if profile and profile['opportunity_type'] == 'internship' %}selected{% endif %}
+                                    >
+                                        Internship
+                                    </option>
+
+                                    <option
+                                        value="research"
+                                        {% if profile and profile['opportunity_type'] == 'research' %}selected{% endif %}
+                                    >
+                                        Research Project
+                                    </option>
+
+                                    <option
+                                        value="training"
+                                        {% if profile and profile['opportunity_type'] == 'training' %}selected{% endif %}
+                                    >
+                                        Industrial Training
+                                    </option>
+
+                                    <option
+                                        value="placement"
+                                        {% if profile and profile['opportunity_type'] == 'placement' %}selected{% endif %}
+                                    >
+                                        Placement
+                                    </option>
+
+                                    <option
+                                        value="mentorship"
+                                        {% if profile and profile['opportunity_type'] == 'mentorship' %}selected{% endif %}
+                                    >
+                                        Mentorship
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- BIO -->
+
+                            <div class="form-group full-width">
+
+                                <label for="bio">
+                                    About You
+                                </label>
+
+                                <textarea
+                                    id="bio"
+                                    name="bio"
+                                    placeholder="Briefly describe your academic interests, career goals and areas you want to develop."
+                                >{{ profile['bio'] if profile and profile['bio'] else '' }}</textarea>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SAVE -->
+
+                        <button
+                            type="submit"
+                            class="save-btn"
+                        >
+                            Save Profile
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= SKILLS ================= -->
+
+            <section class="panel skills-section">
+
+                <h3>
+                    Current Skill Categories
+                </h3>
+
+                <div class="skill-tags">
+
+                    <span class="skill-tag">
+                        AYUSH Domain Knowledge
+                    </span>
+
+                    <span class="skill-tag">
+                        Research & Documentation
+                    </span>
+
+                    <span class="skill-tag">
+                        Healthcare Data & Digital Skills
+                    </span>
+
+                    <span class="skill-tag">
+                        Communication
+                    </span>
+
+                    <span class="skill-tag">
+                        Analytical Thinking
+                    </span>
+
+                    <span class="skill-tag">
+                        Problem Solving
+                    </span>
+
+                </div>
+
+
+                <div class="note">
+
+                    Your skill profile will be refined after completing
+                    the Skill Assessment. These skills will later be used
+                    for skill-gap analysis, learning recommendations,
+                    internship matching and placement recommendations.
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

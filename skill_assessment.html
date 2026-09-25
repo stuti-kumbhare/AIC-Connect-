@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Skill Assessment - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f5;
+            color: #1f2937;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: #14532d;
+            color: white;
+            padding: 24px 18px;
+            overflow-y: auto;
+        }
+
+        .brand {
+            padding: 5px 12px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 18px;
+        }
+
+        .brand h2 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .brand p {
+            font-size: 11px;
+            color: #d1fae5;
+        }
+
+        .menu-title {
+            font-size: 11px;
+            color: #bbf7d0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px 12px 10px;
+        }
+
+        .nav-item {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 11px 13px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.13);
+        }
+
+        .logout {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 18px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 17px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar h1 {
+            color: #14532d;
+            font-size: 23px;
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #dff2e5;
+            color: #14532d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .profile-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .profile-text span {
+            display: block;
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 32px;
+            max-width: 1100px;
+        }
+
+        .intro {
+            margin-bottom: 25px;
+        }
+
+        .intro h2 {
+            color: #124e2a;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            color: #6b7280;
+            font-size: 14px;
+            max-width: 850px;
+            line-height: 1.6;
+        }
+
+        /* ================= INFO ================= */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .info-card h3 {
+            color: #176b3a;
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .info-card p {
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* ================= QUESTION CARD ================= */
+
+        .question-card {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 14px;
+            padding: 27px;
+            margin-bottom: 20px;
+        }
+
+        .category {
+            display: inline-block;
+            background: #eaf6ee;
+            color: #176b3a;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 13px;
+        }
+
+        .question-number {
+            color: #6b7280;
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .question {
+            color: #1f2937;
+            font-size: 17px;
+            line-height: 1.5;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            border: 1px solid #dfe5e1;
+            border-radius: 9px;
+            padding: 13px 15px;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+
+        .option:hover {
+            border-color: #176b3a;
+            background: #f4faf6;
+        }
+
+        .option label {
+            display: block;
+            cursor: pointer;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .option input {
+            margin-right: 9px;
+        }
+
+        /* ================= SUBMIT ================= */
+
+        .submit-area {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 14px;
+            padding: 22px;
+            text-align: right;
+            margin-top: 25px;
+        }
+
+        .submit-btn {
+            border: none;
+            background: #176b3a;
+            color: white;
+            padding: 14px 26px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #12552e;
+        }
+
+        .note {
+            background: #f7faf8;
+            border: 1px solid #e4ebe6;
+            border-radius: 9px;
+            padding: 14px;
+            margin-top: 20px;
+            color: #6b7280;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty-box {
+            background: white;
+            border: 1px solid #e3e8e4;
+            border-radius: 14px;
+            padding: 35px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                margin-left: 210px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .profile-text {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>AYUSH SkillBridge</h2>
+            <p>Student Portal</p>
+        </div>
+
+        <div class="menu-title">
+            Main Menu
+        </div>
+
+        <a href="/student/dashboard" class="nav-item">
+            🏠 Dashboard
+        </a>
+
+        <a href="/student/profile" class="nav-item">
+            👤 My Profile
+        </a>
+
+        <a href="/student/assessment" class="nav-item active">
+            📝 Skill Assessment
+        </a>
+
+        <a href="#" class="nav-item">
+            📊 Skill Gap Analysis
+        </a>
+
+        <a href="#" class="nav-item">
+            🎓 Learning Programs
+        </a>
+
+        <a href="#" class="nav-item">
+            🌿 AYUSH Internships
+        </a>
+
+        <a href="#" class="nav-item">
+            💼 Placements
+        </a>
+
+        <div class="menu-title">
+            My Activity
+        </div>
+
+        <a href="#" class="nav-item">
+            📋 My Applications
+        </a>
+
+        <a href="#" class="nav-item">
+            🪪 Digital Portfolio
+        </a>
+
+        <a href="#" class="nav-item">
+            🔔 Notifications
+        </a>
+
+        <div class="logout">
+            <a href="/logout" class="nav-item">
+                🚪 Logout
+            </a>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <h1>Skill Assessment</h1>
+
+            <div class="profile-area">
+
+                <div class="avatar">
+                    {{ name[0] | upper }}
+                </div>
+
+                <div class="profile-text">
+
+                    <strong>
+                        {{ name }}
+                    </strong>
+
+                    <span>
+                        Student
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <div class="content">
+
+            <!-- INTRO -->
+
+            <div class="intro">
+
+                <h2>
+                    Discover Your Skill Profile
+                </h2>
+
+                <p>
+                    Complete the assessment to create an initial competency
+                    profile. Your responses will be used for skill scoring,
+                    skill-gap analysis and future opportunity matching.
+                </p>
+
+            </div>
+
+
+            <!-- INFO CARDS -->
+
+            <section class="info-grid">
+
+                <div class="info-card">
+
+                    <h3>
+                        ⏱ Estimated Time
+                    </h3>
+
+                    <p>
+                        Approximately 10–15 minutes.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>
+                        📋 Assessment Areas
+                    </h3>
+
+                    <p>
+                        AYUSH domain knowledge, research, digital skills,
+                        analytical thinking, communication and aptitude.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <h3>
+                        🎯 Assessment Goal
+                    </h3>
+
+                    <p>
+                        Understand current competencies and identify
+                        areas that may need development.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= ASSESSMENT FORM ================= -->
+
+            <form
+                method="POST"
+                action="/student/assessment"
+            >
+
+                {% if questions %}
+
+                    {% for question in questions %}
+
+                        <section class="question-card">
+
+                            <span class="category">
+                                {{ question['category'] }}
+                            </span>
+
+                            <div class="question-number">
+                                Question {{ loop.index }}
+                            </div>
+
+                            <div class="question">
+                                {{ question['question'] }}
+                            </div>
+
+
+                            <!-- OPTION A -->
+
+                            {% if question['option_a'] %}
+
+                                <div class="option">
+
+                                    <label>
+
+                                        <input
+                                            type="radio"
+                                            name="q{{ question['id'] }}"
+                                            value="1"
+                                            required
+                                        >
+
+                                        {{ question['option_a'] }}
+
+                                    </label>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- OPTION B -->
+
+                            {% if question['option_b'] %}
+
+                                <div class="option">
+
+                                    <label>
+
+                                        <input
+                                            type="radio"
+                                            name="q{{ question['id'] }}"
+                                            value="2"
+                                        >
+
+                                        {{ question['option_b'] }}
+
+                                    </label>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- OPTION C -->
+
+                            {% if question['option_c'] %}
+
+                                <div class="option">
+
+                                    <label>
+
+                                        <input
+                                            type="radio"
+                                            name="q{{ question['id'] }}"
+                                            value="3"
+                                        >
+
+                                        {{ question['option_c'] }}
+
+                                    </label>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- OPTION D -->
+
+                            {% if question['option_d'] %}
+
+                                <div class="option">
+
+                                    <label>
+
+                                        <input
+                                            type="radio"
+                                            name="q{{ question['id'] }}"
+                                            value="4"
+                                        >
+
+                                        {{ question['option_d'] }}
+
+                                    </label>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- OPTION E -->
+
+                            {% if question['option_e'] %}
+
+                                <div class="option">
+
+                                    <label>
+
+                                        <input
+                                            type="radio"
+                                            name="q{{ question['id'] }}"
+                                            value="5"
+                                        >
+
+                                        {{ question['option_e'] }}
+
+                                    </label>
+
+                                </div>
+
+                            {% endif %}
+
+                        </section>
+
+                    {% endfor %}
+
+
+                    <!-- SUBMIT -->
+
+                    <div class="submit-area">
+
+                        <button
+                            type="submit"
+                            class="submit-btn"
+                        >
+                            Submit Assessment
+                        </button>
+
+                    </div>
+
+
+                    <div class="note">
+
+                        <strong>Before submitting:</strong>
+                        Make sure every question has an answer.
+                        Your responses will be stored with your assessment
+                        result and used to build your skill profile.
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-box">
+
+                        <h3>
+                            No Assessment Questions Available
+                        </h3>
+
+                        <p>
+                            Please try again later.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

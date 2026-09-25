@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f7faf8;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: #ffffff;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 700;
+            color: #176b3a;
+        }
+
+        .logo span {
+            display: block;
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: normal;
+            margin-top: -3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #176b3a;
+        }
+
+        .login-btn {
+            padding: 10px 18px;
+            border: 1px solid #176b3a;
+            border-radius: 7px;
+            color: #176b3a !important;
+        }
+
+        .hero {
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            padding: 80px 7%;
+            background: linear-gradient(135deg, #eaf7ef, #f7fbf8);
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #d9f0e1;
+            color: #176b3a;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 54px;
+            line-height: 1.1;
+            color: #124e2a;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #176b3a;
+        }
+
+        .hero h2 {
+            font-size: 24px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #5b6470;
+            max-width: 680px;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #176b3a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #12552e;
+        }
+
+        .btn-outline {
+            border: 2px solid #176b3a;
+            color: #176b3a;
+            background: white;
+        }
+
+        .btn-outline:hover {
+            background: #eef8f1;
+        }
+
+        .stats {
+            background: white;
+            padding: 35px 7%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .stat h3 {
+            font-size: 29px;
+            color: #176b3a;
+            margin-bottom: 5px;
+        }
+
+        .stat p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .section {
+            padding: 85px 7%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: #124e2a;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            max-width: 750px;
+            margin: 0 auto 45px;
+            color: #6b7280;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .role-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+            transition: 0.25s;
+        }
+
+        .role-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .role-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e6f5eb;
+            font-size: 28px;
+        }
+
+        .role-card h3 {
+            color: #176b3a;
+            margin-bottom: 10px;
+        }
+
+        .role-card p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .how-section {
+            background: #eef8f1;
+        }
+
+        .workflow {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            align-items: center;
+            gap: 12px;
+        }
+
+        .workflow-step {
+            background: white;
+            padding: 22px 10px;
+            border-radius: 12px;
+            font-weight: 700;
+            color: #176b3a;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .workflow-arrow {
+            font-size: 24px;
+            color: #176b3a;
+        }
+
+        .feature-grid {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 30px;
+            text-align: left;
+            border-radius: 14px;
+        }
+
+        .feature-card h3 {
+            color: #176b3a;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .cta {
+            margin: 0 7% 80px;
+            padding: 60px 30px;
+            background: #176b3a;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 25px;
+            opacity: 0.92;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #176b3a;
+            padding: 13px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .cta-btn:hover {
+            background: #f0fdf4;
+        }
+
+        footer {
+            background: #103c23;
+            color: white;
+            padding: 45px 7%;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-content h3 {
+            margin-bottom: 12px;
+        }
+
+        .footer-content p,
+        .footer-content a {
+            color: #d1d5db;
+            font-size: 14px;
+        }
+
+        .footer-content a {
+            display: block;
+            text-decoration: none;
+            margin-bottom: 7px;
+        }
+
+        .footer-content a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            text-align: center;
+            color: #d1d5db;
+            font-size: 13px;
+        }
+
+        @media (max-width: 1000px) {
+
+            .role-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .workflow {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero h2 {
+                font-size: 20px;
+            }
+
+            .role-grid,
+            .feature-grid,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <a href="{{ url_for('home') }}" style="text-decoration:none;">
+            <div class="logo">
+                AYUSH SkillBridge
+                <span>Academia–Industry Collaboration Portal</span>
+            </div>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('home') }}">Home</a>
+
+            <a href="#about">About</a>
+
+            <a href="#features">Features</a>
+
+            <a href="#opportunities">Opportunities</a>
+
+            <a href="{{ url_for('login') }}" class="login-btn">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                Ministry of Ayush Problem Statement • SIH26044
+            </div>
+
+            <h1>
+                Bridge <span>Skills</span> with
+                <span>Opportunities</span>
+            </h1>
+
+            <h2>
+                Smart Academia–Industry Collaboration Platform
+            </h2>
+
+            <p>
+                AYUSH SkillBridge connects students, academicians,
+                industries and institutions through intelligent skill
+                mapping, personalized learning, internships,
+                placements and industry–academia collaboration.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{{ url_for('register') }}"
+                   class="btn btn-primary">
+                    Get Started
+                </a>
+
+                <a href="#features"
+                   class="btn btn-outline">
+                    Explore Features
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATS -->
+    <section class="stats">
+
+        <div class="stat">
+            <h3>4</h3>
+            <p>Connected Stakeholders</p>
+        </div>
+
+        <div class="stat">
+            <h3>360°</h3>
+            <p>Skill Development Lifecycle</p>
+        </div>
+
+        <div class="stat">
+            <h3>AI</h3>
+            <p>Smart Matching</p>
+        </div>
+
+        <div class="stat">
+            <h3>1</h3>
+            <p>Unified Platform</p>
+        </div>
+
+    </section>
+
+
+    <!-- ROLES -->
+    <section class="section" id="about">
+
+        <h2 class="section-title">
+            One Platform. Four Stakeholders.
+        </h2>
+
+        <p class="section-subtitle">
+            AYUSH SkillBridge brings together everyone involved in
+            skill development, internships, placements and collaboration.
+        </p>
+
+        <div class="role-grid">
+
+            <div class="role-card">
+                <div class="role-icon">🎓</div>
+
+                <h3>Students</h3>
+
+                <p>
+                    Assess skills, identify gaps, learn in-demand skills,
+                    discover opportunities and build a digital portfolio.
+                </p>
+            </div>
+
+
+            <div class="role-card">
+                <div class="role-icon">👩‍🏫</div>
+
+                <h3>Academicians</h3>
+
+                <p>
+                    Explore faculty internships, FDPs, training,
+                    research, consultancy and industry collaboration.
+                </p>
+            </div>
+
+
+            <div class="role-card">
+                <div class="role-icon">🏢</div>
+
+                <h3>Industry</h3>
+
+                <p>
+                    Post internships, jobs and learning programs and
+                    find suitable candidates through skill matching.
+                </p>
+            </div>
+
+
+            <div class="role-card">
+                <div class="role-icon">🏫</div>
+
+                <h3>Institutions</h3>
+
+                <p>
+                    Monitor student skills, internships, placements
+                    and industry skill-demand trends.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+    <section class="section how-section">
+
+        <h2 class="section-title">
+            How AYUSH SkillBridge Works
+        </h2>
+
+        <p class="section-subtitle">
+            A complete lifecycle from skill assessment to career opportunity.
+        </p>
+
+        <div class="workflow">
+
+            <div class="workflow-step">Assess</div>
+
+            <div class="workflow-arrow">→</div>
+
+            <div class="workflow-step">Analyze</div>
+
+            <div class="workflow-arrow">→</div>
+
+            <div class="workflow-step">Learn</div>
+
+            <div class="workflow-arrow">→</div>
+
+            <div class="workflow-step">Match</div>
+
+            <div class="workflow-arrow">→</div>
+
+            <div class="workflow-step">Apply</div>
+
+            <div class="workflow-arrow">→</div>
+
+            <div class="workflow-step">Track</div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+
+        <h2 class="section-title">
+            Smart Features
+        </h2>
+
+        <p class="section-subtitle">
+            Intelligent automation designed around the needs of
+            students, academia, industry and institutions.
+        </p>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <h3>Skill Assessment</h3>
+                <p>
+                    Technical, soft-skill and aptitude assessments
+                    generate a detailed skill profile.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Skill Gap Analysis</h3>
+                <p>
+                    Automatically identify the skills a student needs
+                    for a selected career role.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Smart Matching</h3>
+                <p>
+                    Match students with suitable internships and jobs
+                    based on skills and eligibility.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Learning Recommendations</h3>
+                <p>
+                    Recommend courses, certifications, workshops and
+                    training based on individual skill gaps.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Digital Portfolio</h3>
+                <p>
+                    Showcase verified skills, projects, certificates,
+                    internships and achievements.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Analytics & Insights</h3>
+                <p>
+                    Help institutions and industries monitor skill
+                    development, placement readiness and demand trends.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- OPPORTUNITIES -->
+    <section class="section" id="opportunities">
+
+        <h2 class="section-title">
+            Opportunities for Everyone
+        </h2>
+
+        <p class="section-subtitle">
+            Discover career, learning and collaboration opportunities
+            through one connected platform.
+        </p>
+
+        <div class="role-grid">
+
+            <div class="role-card">
+                <div class="role-icon">💼</div>
+
+                <h3>Internships</h3>
+
+                <p>
+                    Industry internships and live projects matched
+                    with student skills.
+                </p>
+            </div>
+
+
+            <div class="role-card">
+                <div class="role-icon">📈</div>
+
+                <h3>Placements</h3>
+
+                <p>
+                    Job opportunities with skill-based candidate matching
+                    and application tracking.
+                </p>
+            </div>
+
+
+            <div class="role-card">
+                <div class="role-icon">📚</div>
+
+                <h3>Learning</h3>
+
+                <p>
+                    Industry training, certifications, workshops,
+                    mentorship and FDP programs.
+                </p>
+            </div>
+
+
+            <div class="role-card">
+                <div class="role-icon">🤝</div>
+
+                <h3>Collaboration</h3>
+
+                <p>
+                    Mentorship, research, innovation challenges,
+                    guest lectures and live projects.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+
+        <h2>Build Skills. Discover Opportunities.</h2>
+
+        <p>
+            Connect education with industry requirements through
+            a smarter, skill-driven ecosystem.
+        </p>
+
+        <a href="{{ url_for('register') }}"
+           class="cta-btn">
+            Join AYUSH SkillBridge
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>AYUSH SkillBridge</h3>
+
+                <p>
+                    Academia–Industry Collaboration Portal for skill
+                    mapping, internships, placements and collaboration.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>Platform</h3>
+
+                <a href="{{ url_for('home') }}">
+                    Home
+                </a>
+
+                <a href="#features">
+                    Features
+                </a>
+
+                <a href="#opportunities">
+                    Opportunities
+                </a>
+
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+
+                <a href="{{ url_for('register') }}">
+                    Register
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>Project</h3>
+
+                <p>SIH26044</p>
+
+                <p>Theme: Smart Automation</p>
+
+                <p>Organization: Ministry of Ayush</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+            © 2026 AYUSH SkillBridge • SIH26044
+        </div>
+
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications - AYUSH SkillBridge</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8f6;
+            color: #1f2937;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            padding: 25px 18px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #16834a;
+            margin-bottom: 35px;
+        }
+
+        .nav a {
+            display: block;
+            text-decoration: none;
+            color: #4b5563;
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 7px;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #e9f7ef;
+            color: #16834a;
+            font-weight: 600;
+        }
+
+        .logout {
+            margin-top: 25px;
+        }
+
+        .logout a {
+            color: #dc2626;
+        }
+
+        .main {
+            flex: 1;
+            padding: 35px;
+        }
+
+        .topbar {
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            font-size: 30px;
+            color: #111827;
+        }
+
+        .topbar p {
+            color: #6b7280;
+            margin-top: 6px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 18px;
+            color: #111827;
+        }
+
+        .notification {
+            display: flex;
+            gap: 15px;
+            padding: 16px 0;
+            border-bottom: 1px solid #edf0ee;
+        }
+
+        .notification:last-child {
+            border-bottom: none;
+        }
+
+        .icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #e9f7ef;
+            color: #16834a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+            flex-shrink: 0;
+        }
+
+        .notification-content h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #1f2937;
+        }
+
+        .notification-content p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 7px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #e9f7ef;
+            color: #16834a;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 210px;
+            }
+
+            .main {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            AYUSH SkillBridge
+        </div>
+
+        <div class="nav">
+
+            <!-- CORRECT ROUTES -->
+
+            <a href="{{ url_for('student_dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('student_profile') }}">
+                Profile
+            </a>
+
+            <a href="{{ url_for('student_assessment') }}">
+                Skill Assessment
+            </a>
+
+            <a href="{{ url_for('student_skill_gap') }}">
+                Skill Gap
+            </a>
+
+            <a href="{{ url_for('student_learning') }}">
+                Learning
+            </a>
+
+            <a href="{{ url_for('student_opportunities') }}">
+                AYUSH Internships
+            </a>
+
+            <a href="{{ url_for('student_placements') }}">
+                Placements
+            </a>
+
+            <a href="{{ url_for('student_applications') }}">
+                My Applications
+            </a>
+
+            <a href="{{ url_for('student_portfolio') }}">
+                Digital Portfolio
+            </a>
+
+            <a href="{{ url_for('notifications') }}" class="active">
+                Notifications
+            </a>
+
+            <div class="logout">
+                <a href="{{ url_for('logout') }}">
+                    Logout
+                </a>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <h1>Notifications</h1>
+
+            <p>
+                Stay updated with your applications and latest opportunities.
+            </p>
+
+        </div>
+
+
+        <!-- APPLICATION UPDATES -->
+
+        <div class="card">
+
+            <h2>Application Updates</h2>
+
+            {% if applications %}
+
+                {% for application in applications %}
+
+                <div class="notification">
+
+                    <div class="icon">
+                        ✓
+                    </div>
+
+                    <div class="notification-content">
+
+                        <h3>
+                            Application submitted for
+                            {{ application.title }}
+                        </h3>
+
+                        <p>
+                            Your application has been successfully submitted.
+                        </p>
+
+                        <span class="badge">
+                            Status: {{ application.status }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty">
+                    No application notifications yet.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- LATEST OPPORTUNITIES -->
+
+        <div class="card">
+
+            <h2>Latest Opportunities</h2>
+
+            {% if opportunities %}
+
+                {% for opportunity in opportunities %}
+
+                <a href="{{ url_for('student_opportunity_details', opportunity_id=opportunity.id) }}"
+                   style="text-decoration:none; color:inherit;">
+
+                    <div class="notification">
+
+                        <div class="icon">
+                            ★
+                        </div>
+
+                        <div class="notification-content">
+
+                            <h3>
+                                {{ opportunity.title }}
+                            </h3>
+
+                            <p>
+                                {{ opportunity.organization }}
+
+                                {% if opportunity.location %}
+                                    • {{ opportunity.location }}
+                                {% endif %}
+                            </p>
+
+                            <span class="badge">
+                                {{ opportunity.opportunity_type }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty">
+                    No new opportunities available.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
